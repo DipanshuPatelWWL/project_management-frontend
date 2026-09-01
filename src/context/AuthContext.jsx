@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     // App khulte hi check karo — kya pehle se koi logged in hai (cookie se)
-    useEffect(() => {
+    useEffect(() => { 
         const checkLoggedIn = async () => {
             try {
                 const data = await authService.getCurrentUser();
@@ -26,11 +26,11 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     // Login function — poore app se call hoga
-    const login = async (email, password) => {
+ const login = async (email, password) => {
         const data = await authService.login(email, password);
         setUser(data.user);
         return data;
-    };
+    };   
 
     // Logout function
     const logout = async () => {

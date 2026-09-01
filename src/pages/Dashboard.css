@@ -1,0 +1,39 @@
+.dashboard-page {
+  padding: 24px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.welcome-text {
+  color: #555;
+}
+
+.logout-button {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.dashboard-error {
+  color: red;
+}
+
+.project-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.project-table th,
+.project-table td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.project-table th {
+  background: #f4f4f4;
+}

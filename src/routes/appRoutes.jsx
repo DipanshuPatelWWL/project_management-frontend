@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Login from "../pages/Login";
+import Dashboard from "../pages/Dashboard";
 
 const ProtectedRoute = ({ children }) => {
     const { user, loading } = useAuth();
@@ -25,7 +26,7 @@ const AppRoutes = () => {
                 path="/dashboard"
                 element={
                     <ProtectedRoute>
-                        <div>Dashboard (currently empty )</div>
+                        <Dashboard />
                     </ProtectedRoute>
                 }
             />
