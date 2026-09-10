@@ -1,0 +1,35 @@
+.rn-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rn-table th,
+.rn-table td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.rn-table th {
+  background: #f4f4f4;
+}
+
+.rn-unread {
+  background: #f5f5ff;
+  font-weight: 600;
+}
+
+.rn-badge-read {
+  color: #666;
+  font-size: 12px;
+}
+
+.rn-badge-unread {
+  color: #4f46e5;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.rn-error {
+  color: red;
+}
