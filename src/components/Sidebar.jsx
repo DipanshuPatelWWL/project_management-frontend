@@ -2,7 +2,10 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Sidebar.css";
 
-
+// IMPORTANT: This role-based filtering is a UX convenience only.
+// The backend does NOT enforce role restrictions on most of these
+// resources - only Users, Companies, and Reports are actually
+// role-restricted server-side.
 const NAV_SECTIONS = [
     {
         section: "Management",
@@ -97,7 +100,7 @@ const NAV_SECTIONS = [
     },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ onProfileClick }) => {
     const { user, logout } = useAuth();
     const role = user?.role;
 
@@ -144,6 +147,10 @@ const Sidebar = () => {
                     );
                 })}
             </nav>
+
+            <button className="sidebar-profile" onClick={onProfileClick}>
+                Profile
+            </button>
 
             <button className="sidebar-logout" onClick={handleLogout}>
                 Logout

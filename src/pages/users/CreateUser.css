@@ -2,6 +2,22 @@
     padding: 24px;
 }
 
+.create-company-page {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.create-company-card {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
 .create-user-card {
     max-width: 800px;
     margin: 0 auto;

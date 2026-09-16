@@ -1,63 +1,443 @@
+/* =========================================================
+   PM SYSTEM - PROFESSIONAL DARK SIDEBAR
+   ========================================================= */
+
 .sidebar {
-  width: 220px;
+  width: 270px;
   min-height: 100vh;
-  background: #1a1a2e;
-  color: #fff;
-  padding: 20px 0;
   flex-shrink: 0;
+
   display: flex;
   flex-direction: column;
+
+  padding: 24px 16px;
+
+  position: relative;
+  overflow: hidden;
+
+  /* DARK PROFESSIONAL BACKGROUND */
+  background:
+    linear-gradient(
+      180deg,
+      #151a2d 0%,
+      #111629 50%,
+      #0d1222 100%
+    );
+
+  border-right: 1px solid #252c45;
+
+  color: #d7dbea;
+
+  box-shadow:
+    6px 0 25px rgba(0, 0, 0, 0.25);
+
+  z-index: 10;
 }
 
+
+/* =========================================================
+   LOGO / PM SYSTEM BRANDING
+   ========================================================= */
+
 .sidebar-logo {
-  font-size: 18px;
-  font-weight: 700;
-  padding: 0 20px 20px;
-  border-bottom: 1px solid #33334d;
+  display: flex;
+  align-items: center;
+
+  min-height: 58px;
+
+  padding: 0 10px 18px;
+  margin-bottom: 18px;
+
+  position: relative;
+  z-index: 2;
+
+  color: #f1f5f9;
+
+  background: transparent;
+
+  font-size: 17px;
+  font-weight: 650;
+
+  letter-spacing: 0.1px;
+
+  border-bottom: 1px solid #252c45;
+
+  border-radius: 0;
 }
+
+
+/* =========================================================
+   PROFESSIONAL LOGO ICON
+   ========================================================= */
+
+.sidebar-logo-icon {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 11px;
+
+  border-radius: 8px;
+
+  background: #4f46e5;
+
+  color: #ffffff;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  box-shadow:
+    0 4px 12px rgba(79, 70, 229, 0.25);
+
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sidebar-logo-icon:hover {
+  background: #6366f1;
+
+  box-shadow:
+    0 5px 15px rgba(99, 102, 241, 0.35);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 
 .sidebar-nav {
   display: flex;
   flex-direction: column;
-  margin-top: 12px;
+
   flex: 1;
+
+  position: relative;
+  z-index: 2;
+
+  padding: 0 3px;
+
   overflow-y: auto;
 }
 
+
+/* =========================================================
+   CUSTOM SCROLLBAR
+   ========================================================= */
+
+.sidebar-nav::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: #303853;
+  border-radius: 10px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background: #46516f;
+}
+
+
+/* =========================================================
+   SIDEBAR SECTIONS
+   ========================================================= */
+
 .sidebar-section {
-  margin-top: 16px;
+  margin-top: 22px;
+  margin-bottom: 7px;
+}
+
+.sidebar-section:first-child {
+  margin-top: 4px;
 }
 
 .sidebar-section-title {
+  padding: 0 14px;
+  margin-bottom: 9px;
+
+  color: #68728e;
+
   font-size: 11px;
+  font-weight: 700;
+
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #7a7a99;
-  padding: 0 20px;
-  margin-bottom: 4px;
+
+  letter-spacing: 0.12em;
 }
+
+
+/* =========================================================
+   SIDEBAR LINKS
+   ========================================================= */
 
 .sidebar-link {
-  padding: 10px 20px;
-  color: #c7c7d9;
+  display: flex;
+  align-items: center;
+
+  min-height: 48px;
+
+  margin: 4px 0;
+
+  padding: 0 15px;
+
+  position: relative;
+
+  color: #aeb6ca;
+
   text-decoration: none;
+
   font-size: 14px;
-  display: block;
+  font-weight: 500;
+
+  border: 1px solid transparent;
+
+  border-radius: 9px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
 }
+
+
+/* =========================================================
+   SIDEBAR ICONS
+   ========================================================= */
+
+.sidebar-link svg,
+.sidebar-link .icon {
+  width: 19px;
+  height: 19px;
+
+  flex-shrink: 0;
+
+  margin-right: 13px;
+
+  color: #7c86a3;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+/* =========================================================
+   HOVER EFFECT
+   ========================================================= */
 
 .sidebar-link:hover {
-  background: #24243e;
-  color: #fff;
+  color: #ffffff;
+
+  background: #1e263d;
+
+  border-color: #2b3552;
+
+  transform: translateX(3px);
 }
+
+.sidebar-link:hover svg,
+.sidebar-link:hover .icon {
+  color: #818cf8;
+
+  transform: scale(1.05);
+}
+
+
+/* =========================================================
+   ACTIVE LINK
+   ========================================================= */
 
 .sidebar-link.active {
-  background: #4f46e5;
-  color: #fff;
+  color: #ffffff;
+
   font-weight: 600;
+
+  background:
+    linear-gradient(
+      90deg,
+      #3730a3,
+      #4f46e5
+    );
+
+  border-color: #5b5ff0;
+
+  box-shadow:
+    0 6px 18px rgba(79, 70, 229, 0.22);
 }
 
+
+/* =========================================================
+   ACTIVE LEFT INDICATOR
+   ========================================================= */
+
+.sidebar-link.active::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+
+  width: 3px;
+
+  background: #a5b4fc;
+
+  border-radius: 0 4px 4px 0;
+}
+
+
+/* =========================================================
+   ACTIVE ICON
+   ========================================================= */
+
+.sidebar-link.active svg,
+.sidebar-link.active .icon {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   BADGE
+   ========================================================= */
+
+.sidebar-link .badge {
+  margin-left: auto;
+
+  min-width: 23px;
+  height: 23px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 7px;
+
+  color: #ffffff;
+
+  background: #4f46e5;
+
+  border-radius: 20px;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   LOGOUT SECTION
+   ========================================================= */
+
+.sidebar-logout-wrapper {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 15px;
+
+  padding-top: 16px;
+
+  border-top: 1px solid #252c45;
+}
+
+
+/* =========================================================
+   LOGOUT BUTTON
+   ========================================================= */
+
 .sidebar-logout {
-  margin: 12px 20px 0;
+  width: 100%;
+
+  min-height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  padding: 0 15px;
+
+  color: #aeb6ca;
+
+  background: #151b2d;
+
+  border: 1px solid #293149;
+
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+/* =========================================================
+   LOGOUT HOVER
+   ========================================================= */
+
+.sidebar-logout:hover {
+  color: #ffffff;
+
+  background: #9f1239;
+
+  border-color: #be123c;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   LOGOUT ACTIVE
+   ========================================================= */
+
+.sidebar-logout:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 250px;
+  }
+}
+
+@media (max-width: 700px) {
+  .sidebar {
+    width: 230px;
+  }
+}
+
+@media (max-width: 500px) {
+  .sidebar {
+    width: 220px;
+  }
+}
+
+.sidebar-profile {
+  margin: 12px 20px 10;
   padding: 10px;
   background: #2b2b45;
   color: #fff;
@@ -67,6 +447,6 @@
   font-size: 14px;
 }
 
-.sidebar-logout:hover {
+.sidebar-profile:hover {
   background: #3a3a5c;
 }
