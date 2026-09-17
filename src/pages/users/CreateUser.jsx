@@ -246,7 +246,10 @@ const CreateUser = () => {
           <div className="cu-grid">
             <div className="form-group">
               <label htmlFor="employeeId">Employee ID</label>
-              <input id="employeeId" value={employeeId} readOnly />
+              <input id="employeeId"
+                  className="readonly-field"
+
+              value={employeeId} readOnly />
             </div>
 
             <div className="form-group">

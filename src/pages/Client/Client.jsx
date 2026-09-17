@@ -1,99 +1,114 @@
-import { useState, useEffect, useMemo } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import * as userService from "../../services/userService";
-import "./Users.css";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import * as clientService from "../../services/ClientService";
+import * as companyService from "../../services/CompanyService";
+import "./Client.css";
 
 const PAGE_SIZE = 10;
 
-const Users = () => {
+const Clients = () => {
     const navigate = useNavigate();
-    const [searchParams] = useSearchParams();
 
-    const searchFromUrl = searchParams.get("search") || "";
-
-    const [users, setUsers] = useState([]);
+    const [clients, setClients] = useState([]);
+    const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
     const [filters, setFilters] = useState({
-        search: searchFromUrl,
-        role: "",
+        search: "",
         status: "",
+        company: "",
     });
 
     const [page, setPage] = useState(1);
-    const [viewUser, setViewUser] = useState(null);
-    const [deleteUser, setDeleteUser] = useState(null);
+    const [viewClient, setViewClient] = useState(null);
+    const [deleteClient, setDeleteClient] = useState(null);
     const [deleteError, setDeleteError] = useState("");
 
-    const fetchUsers = async () => {
+    const fetchClients = async () => {
         setLoading(true);
         setError("");
 
         try {
-            const data = await userService.getUsers();
+            const data = await clientService.getClients();
 
-            setUsers(data.users || data || []);
+            setClients(data.clients || data.client || data || []);
         } catch (err) {
-            const message =
+            setError(
                 err.response?.data?.message ||
-                "Could not load users.";
-
-            setError(message);
+                "Could not load clients."
+            );
         } finally {
             setLoading(false);
         }
     };
 
+    const fetchCompanies = async () => {
+        try {
+            const data = await companyService.getCompanies();
+
+            setCompanies(data.companies || data || []);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     useEffect(() => {
-        fetchUsers();
+        fetchClients();
+        fetchCompanies();
     }, []);
 
-    useEffect(() => {
-        setFilters((prev) => ({
-            ...prev,
-            search: searchFromUrl,
-        }));
-
-        setPage(1);
-    }, [searchFromUrl]);
-
-    const filteredUsers = useMemo(() => {
-        return users.filter((user) => {
-            const fullName =
-                `${user.firstName || ""} ${user.lastName || ""}`.toLowerCase();
-
+    const filteredClients = useMemo(() => {
+        return clients.filter((client) => {
             const searchValue = filters.search.toLowerCase();
+
+            const clientName = client.ClientName?.toLowerCase() || "";
+            const email = client.email?.toLowerCase() || "";
+            const phone = client.phone?.toLowerCase() || "";
+            const company = client.company?.toLowerCase() || "";
 
             const matchesSearch =
                 !filters.search ||
-                fullName.includes(searchValue) ||
-                user.email?.toLowerCase().includes(searchValue) ||
-                user.employeeId?.toLowerCase().includes(searchValue);
-
-            const matchesRole =
-                !filters.role || user.role === filters.role;
+                clientName.includes(searchValue) ||
+                email.includes(searchValue) ||
+                phone.includes(searchValue) ||
+                company.includes(searchValue);
 
             const matchesStatus =
-                !filters.status || user.status === filters.status;
+                !filters.status ||
+                client.status === filters.status;
+
+            const matchesCompany =
+                !filters.company ||
+                client.company === filters.company;
 
             return (
                 matchesSearch &&
-                matchesRole &&
-                matchesStatus
+                matchesStatus &&
+                matchesCompany
             );
         });
-    }, [users, filters]);
+    }, [clients, filters]);
 
     const totalPages = Math.max(
         1,
-        Math.ceil(filteredUsers.length / PAGE_SIZE)
+        Math.ceil(filteredClients.length / PAGE_SIZE)
     );
 
-    const paginatedUsers = filteredUsers.slice(
+    const paginatedClients = filteredClients.slice(
         (page - 1) * PAGE_SIZE,
         page * PAGE_SIZE
     );
+
+    const totalClients = clients.length;
+
+    const activeClients = clients.filter(
+        (client) => client.status?.toLowerCase() === "active"
+    ).length;
+
+    const inactiveClients = clients.filter(
+        (client) => client.status?.toLowerCase() === "inactive"
+    ).length;
 
     const handleFiltersChange = (newFilters) => {
         setFilters(newFilters);
@@ -101,49 +116,75 @@ const Users = () => {
     };
 
     const handleDelete = async () => {
-        if (!deleteUser) return;
+        if (!deleteClient) return;
 
         try {
-            await userService.deleteUser(deleteUser._id);
+            await clientService.deleteClient(deleteClient._id);
 
-            setUsers((prev) =>
-                prev.filter((u) => u._id !== deleteUser._id)
+            setClients((prev) =>
+                prev.filter(
+                    (client) => client._id !== deleteClient._id
+                )
             );
 
-            if (viewUser?._id === deleteUser._id) {
-                setViewUser(null);
-            }
-
-            setDeleteUser(null);
+            setDeleteClient(null);
             setDeleteError("");
+
+            if (viewClient?._id === deleteClient._id) {
+                setViewClient(null);
+            }
         } catch (err) {
             setDeleteError(
                 err.response?.data?.message ||
-                "Could not delete user."
+                "Could not delete client."
             );
         }
     };
 
     return (
-        <div className="users-page">
+        <div className="clients-page">
 
-            <div className="users-top">
-                <h1>Users</h1>
+            <div className="clients-page-header">
+                <div>
+                    <h1>Clients</h1>
+                    <p>
+                        Manage your clients and their company information.
+                    </p>
+                </div>
 
                 <button
-                    className="users-add-btn"
-                    onClick={() => navigate("/users/create")}
+                    className="clients-add-btn"
+                    onClick={() => navigate("/clients/create")}
                 >
-                    + Add User
+                    + Add Client
                 </button>
             </div>
 
-            <div className="users-filters">
+            <div className="client-statistics">
+
+                <div className="client-stat-card">
+                    <span>Total Clients</span>
+                    <strong>{totalClients}</strong>
+                </div>
+
+                <div className="client-stat-card">
+                    <span>Active Clients</span>
+                    <strong>{activeClients}</strong>
+                </div>
+
+                <div className="client-stat-card">
+                    <span>Inactive Clients</span>
+                    <strong>{inactiveClients}</strong>
+                </div>
+
+            </div>
+
+            <div className="clients-filters">
 
                 <input
                     type="text"
-                    className="users-search"
-                    placeholder="Search users..."
+                    className="clients-search"
+                    placeholder="Search clients..."
                     value={filters.search}
                     onChange={(e) =>
                         handleFiltersChange({
@@ -152,31 +193,6 @@ const Users = () => {
                         })
                     }
                 />
-
-                <select
-                    value={filters.role}
-                    onChange={(e) =>
-                        handleFiltersChange({
-                            ...filters,
-                            role: e.target.value,
-                        })
-                    }
-                >
-                    <option value="">All Roles</option>
-                    <option value="SuperAdmin">SuperAdmin</option>
-                    <option value="Admin">Admin</option>
-                    <option value="ProjectManager">
-                        Project Manager
-                    </option>
-                    <option value="TeamLead">
-                        Team Lead
-                    </option>
-                    <option value="Developer">
-                        Developer
-                    </option>
-                    <option value="QA">QA</option>
-                    <option value="Client">Client</option>
-                </select>
 
                 <select
                     value={filters.status}
@@ -188,78 +204,103 @@ const Users = () => {
                     }
                 >
                     <option value="">All Status</option>
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                    <option value="on-leave">On Leave</option>
+                </select>
+
+                <select
+                    value={filters.company}
+                    onChange={(e) =>
+                        handleFiltersChange({
+                            ...filters,
+                            company: e.target.value,
+                        })
+                    }
+                >
+                    <option value="">All Companies</option>
+
+                    {companies.map((company) => (
+                        <option
+                            key={company._id}
+                            value={company.companyName}
+                        >
+                            {company.companyName}
+                        </option>
+                    ))}
                 </select>
 
             </div>
 
-            {loading && <p>Loading users...</p>}
+            {loading && (
+                <p className="clients-message">
+                    Loading clients...
+                </p>
+            )}
 
             {error && (
-                <p className="users-error">
+                <p className="clients-error">
                     {error}
                 </p>
             )}
 
             {!loading && !error && (
                 <>
-                    {paginatedUsers.length === 0 ? (
-                        <p>No users found.</p>
+                    {paginatedClients.length === 0 ? (
+                        <p className="clients-message">
+                            No clients found.
+                        </p>
                     ) : (
-                        <div className="users-table-container">
-
-                            <table className="users-table">
+                        <div className="clients-table-container">
+                            <table className="clients-table">
 
                                 <thead>
                                     <tr>
-                                        <th>Employee ID</th>
+                                        <th>Client ID</th>
                                         <th>Name</th>
+                                        <th>Email</th>
                                         <th>Phone</th>
                                         <th>Company</th>
-                                        <th>Department</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    {paginatedUsers.map((user) => (
-                                        <tr key={user._id}>
+                                    {paginatedClients.map((client) => (
+                                        <tr key={client._id}>
 
                                             <td>
-                                                {user.employeeId || "-"}
+                                                {client._id || "-"}
                                             </td>
 
                                             <td>
-                                                {user.firstName || user.lastName
-                                                    ? `${user.firstName || ""} ${user.lastName || ""}`.trim()
-                                                    : "-"}
+                                                {client.ClientName || "-"}
                                             </td>
 
                                             <td>
-                                                {user.phone || "-"}
+                                                {client.email || "-"}
                                             </td>
 
                                             <td>
-                                                {user.company?.companyName || "-"}
+                                                {client.phone || "-"}
                                             </td>
 
                                             <td>
-                                                {user.department || "-"}
+                                                {client.company || "-"}
                                             </td>
 
                                             <td>
-                                                {user.status || "-"}
+                                                {client.status || "-"}
                                             </td>
 
                                             <td>
-                                                <div className="user-actions">
+                                                <div className="client-actions">
 
                                                     <button
                                                         className="view-btn"
                                                         onClick={() =>
-                                                            setViewUser(user)
+                                                            setViewClient(client)
                                                         }
                                                     >
                                                         View
@@ -269,7 +310,7 @@ const Users = () => {
                                                         className="edit-btn"
                                                         onClick={() =>
                                                             navigate(
-                                                                `/users/${user._id}/edit`
+                                                                `/clients/${client._id}/edit`
                                                             )
                                                         }
                                                     >
@@ -279,7 +320,7 @@ const Users = () => {
                                                     <button
                                                         className="delete-btn"
                                                         onClick={() => {
-                                                            setDeleteUser(user);
+                                                            setDeleteClient(client);
                                                             setDeleteError("");
                                                         }}
                                                     >
@@ -294,12 +335,11 @@ const Users = () => {
                                 </tbody>
 
                             </table>
-
                         </div>
                     )}
 
-                    {filteredUsers.length > 0 && (
-                        <div className="users-pagination">
+                    {filteredClients.length > 0 && (
+                        <div className="clients-pagination">
 
                             <button
                                 disabled={page === 1}
@@ -328,172 +368,134 @@ const Users = () => {
                 </>
             )}
 
-            {viewUser && (
-                <div className="user-modal-overlay">
-
+            {viewClient && (
+                <div className="client-modal-overlay">
                     <div
-                        className="user-modal"
+                        className="client-modal"
                         onClick={(e) => e.stopPropagation()}
                     >
 
-                        <div className="user-modal-header">
-                            <h2>User Details</h2>
+                        <div className="client-modal-header">
+                            <h2>Client Details</h2>
 
                             <button
-                                className="user-modal-close"
-                                onClick={() => setViewUser(null)}
+                                className="client-modal-close"
+                                onClick={() => setViewClient(null)}
                             >
                                 ×
                             </button>
                         </div>
 
-                        <div className="user-modal-body">
+                        <div className="client-modal-body">
 
-                            <div className="user-detail-item">
-                                <strong>Employee ID</strong>
+                            <div className="client-detail-item">
+                                <strong>Client ID</strong>
                                 <span>
-                                    {viewUser.employeeId || "-"}
+                                    {viewClient._id || "-"}
                                 </span>
                             </div>
 
-                            <div className="user-detail-item">
+                            <div className="client-detail-item">
                                 <strong>Name</strong>
                                 <span>
-                                    {`${viewUser.firstName || ""} ${viewUser.lastName || ""}`.trim() || "-"}
+                                    {viewClient.ClientName || "-"}
                                 </span>
                             </div>
 
-                            <div className="user-detail-item">
+                            <div className="client-detail-item">
                                 <strong>Email</strong>
                                 <span>
-                                    {viewUser.email || "-"}
+                                    {viewClient.email || "-"}
                                 </span>
                             </div>
 
-                            <div className="user-detail-item">
+                            <div className="client-detail-item">
                                 <strong>Phone</strong>
                                 <span>
-                                    {viewUser.phone || "-"}
+                                    {viewClient.phone || "-"}
                                 </span>
                             </div>
 
-                            <div className="user-detail-item">
-                                <strong>Role</strong>
-                                <span>
-                                    {viewUser.role || "-"}
-                                </span>
-                            </div>
-
-                            <div className="user-detail-item">
+                            <div className="client-detail-item">
                                 <strong>Company</strong>
                                 <span>
-                                    {viewUser.company?.companyName || "-"}
+                                    {viewClient.company || "-"}
                                 </span>
                             </div>
 
-                            <div className="user-detail-item">
+                            <div className="client-detail-item">
                                 <strong>Designation</strong>
                                 <span>
-                                    {viewUser.designation || "-"}
+                                    {viewClient.designation || "-"}
                                 </span>
                             </div>
 
-                            <div className="user-detail-item">
-                                <strong>Department</strong>
+                            <div className="client-detail-item">
+                                <strong>Address</strong>
                                 <span>
-                                    {viewUser.department || "-"}
+                                    {viewClient.address || "-"}
                                 </span>
                             </div>
 
-                            <div className="user-detail-item">
-                                <strong>Employment Type</strong>
-                                <span>
-                                    {viewUser.employmentType || "-"}
-                                </span>
-                            </div>
-
-                            <div className="user-detail-item">
-                                <strong>Work Location</strong>
-                                <span>
-                                    {viewUser.workLocation || "-"}
-                                </span>
-                            </div>
-
-                            <div className="user-detail-item">
+                            <div className="client-detail-item">
                                 <strong>Status</strong>
                                 <span>
-                                    {viewUser.status || "-"}
-                                </span>
-                            </div>
-
-                            <div className="user-detail-item">
-                                <strong>Joining Date</strong>
-                                <span>
-                                    {viewUser.joiningDate
-                                        ? new Date(
-                                            viewUser.joiningDate
-                                        ).toLocaleDateString()
-                                        : "-"}
+                                    {viewClient.status || "-"}
                                 </span>
                             </div>
 
                         </div>
 
                     </div>
-
                 </div>
             )}
 
-            {deleteUser && (
-                <div className="delete-modal-overlay">
-
+            {deleteClient && (
+                <div className="client-delete-modal-overlay">
                     <div
-                        className="delete-modal"
+                        className="client-delete-modal"
                         onClick={(e) => e.stopPropagation()}
                     >
 
-                        <div className="delete-modal-header">
-                            <h2>Delete User</h2>
+                        <div className="client-modal-header">
+                            <h2>Delete Client</h2>
 
                             <button
-                                className="delete-modal-close"
-                                onClick={() => setDeleteUser(null)}
+                                className="client-modal-close"
+                                onClick={() => setDeleteClient(null)}
                             >
                                 ×
                             </button>
                         </div>
 
-                        <div className="delete-modal-body">
+                        <div className="client-delete-body">
 
                             <p>
                                 Are you sure you want to delete
                                 <strong>
                                     {" "}
-                                    {deleteUser.firstName || ""}{" "}
-                                    {deleteUser.lastName || ""}
-                                    <br />
-                                    {deleteUser.employeeId || ""}
+                                    {deleteClient.ClientName || "this client"}
                                 </strong>
                                 ?
                             </p>
 
-                            <p className="delete-warning">
+                            <p className="client-delete-warning">
                                 This action cannot be undone.
                             </p>
 
                             {deleteError && (
-                                <p className="delete-error">
+                                <p className="client-delete-error">
                                     {deleteError}
                                 </p>
                             )}
 
                         </div>
 
-                        <div className="delete-modal-actions">
+                        <div className="client-delete-actions">
 
                             <button
                                 className="cancel-delete-btn"
-                                onClick={() => setDeleteUser(null)}
+                                onClick={() => setDeleteClient(null)}
                             >
                                 Cancel
                             </button>
@@ -508,7 +510,6 @@ const Users = () => {
                         </div>
 
                     </div>
-
                 </div>
             )}
 
@@ -516,4 +517,4 @@ const Users = () => {
     );
 };
 
-export default Users;
+export default Clients;

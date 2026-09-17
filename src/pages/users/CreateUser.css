@@ -114,3 +114,6 @@
     background-color: #999;
     cursor: not-allowed;
 }
+.readonly-field {
+    cursor: not-allowed;
+}

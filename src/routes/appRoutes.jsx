@@ -8,6 +8,8 @@ import Companies from "../pages/company/Company";
 import CreateCompany from "../pages/company/CreateCompany";
 import ComingSoon from "../pages/ComingSoon";
 import MainLayout from "../layouts/MainLayout";
+import Profile from "../pages/Profile";
+import Clients from "../pages/Client/Client";
 
 const ProtectedRoute = ({ children }) => {
     const { user, loading } = useAuth();
@@ -19,6 +21,8 @@ const ProtectedRoute = ({ children }) => {
     if (!user) {
         return <Navigate to="/login" replace />;
     }
+
+
 
     return children;
 };
@@ -55,15 +59,21 @@ const AppRoutes = () => {
                     element={<Companies />}
                 />
 
+
+                <Route path="/profile" 
+                
+                element={<Profile />} />
+                
                 <Route
                     path="/companies/create"
                     element={<CreateCompany />}
                 />
-
-                <Route
-                    path="/clients"
-                    element={<ComingSoon label="Clients" />}
-                />
+           
+           <Route 
+           path="/clients" 
+           element={<Client />} 
+           
+           />
 
                 <Route
                     path="/projects"

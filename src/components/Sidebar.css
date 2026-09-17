@@ -1,21 +1,17 @@
-/* =========================================================
-   PM SYSTEM - PROFESSIONAL DARK SIDEBAR
-   ========================================================= */
-
 .sidebar {
   width: 270px;
   min-height: 100vh;
+  height: 100vh;
   flex-shrink: 0;
 
   display: flex;
   flex-direction: column;
 
-  padding: 24px 16px;
+  padding: 20px 14px;
 
   position: relative;
   overflow: hidden;
 
-  /* DARK PROFESSIONAL BACKGROUND */
   background:
     linear-gradient(
       180deg,
@@ -32,85 +28,133 @@
     6px 0 25px rgba(0, 0, 0, 0.25);
 
   z-index: 10;
+
+  transition:
+    width 0.28s ease,
+    padding 0.28s ease;
 }
 
+.sidebar-collapsed {
+  width: 76px;
+  padding: 20px 10px;
+}
 
-/* =========================================================
-   LOGO / PM SYSTEM BRANDING
-   ========================================================= */
+.sidebar-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #252c45;
+}
 
 .sidebar-logo {
   display: flex;
   align-items: center;
-
-  min-height: 58px;
-
-  padding: 0 10px 18px;
-  margin-bottom: 18px;
-
-  position: relative;
-  z-index: 2;
-
-  color: #f1f5f9;
-
-  background: transparent;
-
-  font-size: 17px;
-  font-weight: 650;
-
-  letter-spacing: 0.1px;
-
-  border-bottom: 1px solid #252c45;
-
-  border-radius: 0;
+  min-width: 0;
+  padding-left: 6px;
 }
 
-
-/* =========================================================
-   PROFESSIONAL LOGO ICON
-   ========================================================= */
-
 .sidebar-logo-icon {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  margin-right: 11px;
-
-  border-radius: 8px;
+  border-radius: 9px;
 
   background: #4f46e5;
-
   color: #ffffff;
 
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
 
   box-shadow:
     0 4px 12px rgba(79, 70, 229, 0.25);
 
   transition:
-    background 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    background 0.2s ease;
 }
 
 .sidebar-logo-icon:hover {
   background: #6366f1;
-
-  box-shadow:
-    0 5px 15px rgba(99, 102, 241, 0.35);
-
   transform: translateY(-1px);
 }
 
+.sidebar-logo-text {
+  margin-left: 11px;
 
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
+  color: #f1f5f9;
+
+  font-size: 17px;
+  font-weight: 650;
+  white-space: nowrap;
+
+  opacity: 1;
+  transform: translateX(0);
+
+  transition:
+    opacity 0.18s ease,
+    transform 0.25s ease;
+}
+
+.sidebar-collapsed .sidebar-logo-text {
+  width: 0;
+  margin-left: 0;
+  opacity: 0;
+  transform: translateX(-8px);
+  overflow: hidden;
+}
+
+.sidebar-toggle {
+  position: absolute;
+
+  top: 7px;
+  right: -1px;
+
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #303853;
+  border-radius: 8px;
+
+  background: #1b2237;
+  color: #aeb6ca;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sidebar-toggle:hover {
+  background: #2a3350;
+  color: #ffffff;
+  border-color: #4f46e5;
+  transform: scale(1.05);
+}
+
+.sidebar-toggle svg {
+  width: 17px;
+  height: 17px;
+}
+
+.sidebar-collapsed .sidebar-toggle {
+  right: 1px;
+}
 
 .sidebar-nav {
   display: flex;
@@ -121,15 +165,11 @@
   position: relative;
   z-index: 2;
 
-  padding: 0 3px;
+  padding: 0 2px;
 
   overflow-y: auto;
+  overflow-x: hidden;
 }
-
-
-/* =========================================================
-   CUSTOM SCROLLBAR
-   ========================================================= */
 
 .sidebar-nav::-webkit-scrollbar {
   width: 5px;
@@ -148,11 +188,6 @@
   background: #46516f;
 }
 
-
-/* =========================================================
-   SIDEBAR SECTIONS
-   ========================================================= */
-
 .sidebar-section {
   margin-top: 22px;
   margin-bottom: 7px;
@@ -164,7 +199,7 @@
 
 .sidebar-section-title {
   padding: 0 14px;
-  margin-bottom: 9px;
+  margin: 0 0 9px;
 
   color: #68728e;
 
@@ -172,24 +207,33 @@
   font-weight: 700;
 
   text-transform: uppercase;
-
   letter-spacing: 0.12em;
+
+  white-space: nowrap;
+
+  transition:
+    opacity 0.18s ease,
+    height 0.2s ease,
+    margin 0.2s ease;
 }
 
-
-/* =========================================================
-   SIDEBAR LINKS
-   ========================================================= */
+.sidebar-collapsed .sidebar-section-title {
+  opacity: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
 
 .sidebar-link {
   display: flex;
   align-items: center;
 
-  min-height: 48px;
+  width: 100%;
+  min-height: 46px;
 
   margin: 4px 0;
-
-  padding: 0 15px;
+  padding: 0 14px;
 
   position: relative;
 
@@ -201,8 +245,9 @@
   font-weight: 500;
 
   border: 1px solid transparent;
-
   border-radius: 9px;
+
+  box-sizing: border-box;
 
   transition:
     background 0.2s ease,
@@ -211,10 +256,12 @@
     border-color 0.2s ease;
 }
 
-
-/* =========================================================
-   SIDEBAR ICONS
-   ========================================================= */
+.sidebar-link:hover {
+  color: #ffffff;
+  background: #1e263d;
+  border-color: #2b3552;
+  transform: translateX(3px);
+}
 
 .sidebar-link svg,
 .sidebar-link .icon {
@@ -223,8 +270,6 @@
 
   flex-shrink: 0;
 
-  margin-right: 13px;
-
   color: #7c86a3;
 
   transition:
@@ -232,32 +277,41 @@
     transform 0.2s ease;
 }
 
-
-/* =========================================================
-   HOVER EFFECT
-   ========================================================= */
-
-.sidebar-link:hover {
-  color: #ffffff;
-
-  background: #1e263d;
-
-  border-color: #2b3552;
-
-  transform: translateX(3px);
-}
-
 .sidebar-link:hover svg,
 .sidebar-link:hover .icon {
   color: #818cf8;
-
   transform: scale(1.05);
 }
 
+.sidebar-link-text {
+  margin-left: 13px;
 
-/* =========================================================
-   ACTIVE LINK
-   ========================================================= */
+  white-space: nowrap;
+
+  opacity: 1;
+  transform: translateX(0);
+
+  transition:
+    opacity 0.18s ease,
+    transform 0.2s ease;
+}
+
+.sidebar-collapsed .sidebar-link {
+  justify-content: center;
+  padding: 0;
+}
+
+.sidebar-collapsed .sidebar-link-text {
+  width: 0;
+  margin-left: 0;
+  opacity: 0;
+  transform: translateX(-8px);
+  overflow: hidden;
+}
+
+.sidebar-collapsed .sidebar-link:hover {
+  transform: none;
+}
 
 .sidebar-link.active {
   color: #ffffff;
@@ -277,11 +331,6 @@
     0 6px 18px rgba(79, 70, 229, 0.22);
 }
 
-
-/* =========================================================
-   ACTIVE LEFT INDICATOR
-   ========================================================= */
-
 .sidebar-link.active::before {
   content: "";
 
@@ -298,82 +347,29 @@
   border-radius: 0 4px 4px 0;
 }
 
-
-/* =========================================================
-   ACTIVE ICON
-   ========================================================= */
-
 .sidebar-link.active svg,
 .sidebar-link.active .icon {
   color: #ffffff;
 }
 
-
-/* =========================================================
-   BADGE
-   ========================================================= */
-
-.sidebar-link .badge {
-  margin-left: auto;
-
-  min-width: 23px;
-  height: 23px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 0 7px;
-
-  color: #ffffff;
-
-  background: #4f46e5;
-
-  border-radius: 20px;
-
-  font-size: 10px;
-  font-weight: 700;
-}
-
-
-/* =========================================================
-   LOGOUT SECTION
-   ========================================================= */
-
-.sidebar-logout-wrapper {
+.sidebar-bottom {
   position: relative;
-  z-index: 2;
 
   margin-top: 15px;
-
   padding-top: 16px;
 
   border-top: 1px solid #252c45;
 }
 
-
-/* =========================================================
-   LOGOUT BUTTON
-   ========================================================= */
-
+.sidebar-profile,
 .sidebar-logout {
   width: 100%;
-
-  min-height: 46px;
+  min-height: 44px;
 
   display: flex;
   align-items: center;
-  justify-content: center;
 
-  gap: 9px;
-
-  padding: 0 15px;
-
-  color: #aeb6ca;
-
-  background: #151b2d;
-
-  border: 1px solid #293149;
+  padding: 0 14px;
 
   border-radius: 9px;
 
@@ -385,42 +381,80 @@
   transition:
     background 0.2s ease,
     color 0.2s ease,
-    transform 0.2s ease,
-    border-color 0.2s ease;
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
+.sidebar-profile {
+  margin-bottom: 8px;
 
-/* =========================================================
-   LOGOUT HOVER
-   ========================================================= */
+  background: #1a2135;
+  color: #aeb6ca;
+
+  border: 1px solid #293149;
+}
+
+.sidebar-profile:hover {
+  background: #252e48;
+  color: #ffffff;
+  border-color: #3a4665;
+  transform: translateY(-1px);
+}
+
+.sidebar-profile svg,
+.sidebar-logout svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.sidebar-profile span,
+.sidebar-logout span {
+  margin-left: 10px;
+  white-space: nowrap;
+
+  opacity: 1;
+
+  transition:
+    opacity 0.18s ease,
+    margin 0.2s ease;
+}
+
+.sidebar-logout {
+  background: #151b2d;
+  color: #aeb6ca;
+
+  border: 1px solid #293149;
+}
 
 .sidebar-logout:hover {
   color: #ffffff;
-
   background: #9f1239;
-
   border-color: #be123c;
-
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
-
-/* =========================================================
-   LOGOUT ACTIVE
-   ========================================================= */
-
-.sidebar-logout:active {
-  transform: translateY(0);
+.sidebar-collapsed .sidebar-profile,
+.sidebar-collapsed .sidebar-logout {
+  justify-content: center;
+  padding: 0;
 }
 
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
+.sidebar-collapsed .sidebar-profile span,
+.sidebar-collapsed .sidebar-logout span {
+  width: 0;
+  margin-left: 0;
+  opacity: 0;
+  overflow: hidden;
+}
 
 @media (max-width: 900px) {
   .sidebar {
     width: 250px;
+  }
+
+  .sidebar-collapsed {
+    width: 76px;
   }
 }
 
@@ -428,25 +462,18 @@
   .sidebar {
     width: 230px;
   }
+
+  .sidebar-collapsed {
+    width: 76px;
+  }
 }
 
 @media (max-width: 500px) {
   .sidebar {
     width: 220px;
   }
-}
 
-.sidebar-profile {
-  margin: 12px 20px 10;
-  padding: 10px;
-  background: #2b2b45;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.sidebar-profile:hover {
-  background: #3a3a5c;
+  .sidebar-collapsed {
+    width: 76px;
+  }
 }

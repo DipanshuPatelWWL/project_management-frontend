@@ -277,3 +277,7 @@
         padding: 18px;
     }
 }
+
+.readonly-field {
+    cursor: not-allowed;
+}

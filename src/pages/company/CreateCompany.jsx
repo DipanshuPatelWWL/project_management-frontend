@@ -22,6 +22,7 @@ const DAYS = [
 ];
 
 const initialFormState = {
+    companyId: "",
     companyName: "",
     companyCode: "",
     companyLogo: "",
@@ -69,6 +70,7 @@ const CreateCompany = () => {
                 const company = data.company || data;
 
                 setFormData({
+                    companyId: company.companyId || "",
                     companyName: company.companyName || "",
                     companyCode: company.companyCode || "",
                     companyLogo: company.companyLogo || "",
@@ -115,7 +117,9 @@ const CreateCompany = () => {
         setFormData((prev) => ({
             ...prev,
             workingDays: prev.workingDays.includes(day)
-                ? prev.workingDays.filter((item) => item !== day)
+                ? prev.workingDays.filter(
+                      (item) => item !== day
+                  )
                 : [...prev.workingDays, day],
         }));
     };
@@ -169,19 +173,28 @@ const CreateCompany = () => {
                     formData
                 );
             } else {
-                data = await companyService.createCompany(formData);
+                data = await companyService.createCompany(
+                    formData
+                );
+            }
+
+            console.log("CREATE COMPANY RESPONSE:", data);
+
+            const createdCompany = data?.company;
+
+            if (!isEditMode && createdCompany?.companyId) {
+                setFormData({
+                    ...initialFormState,
+                    companyId: createdCompany.companyId,
+                });
             }
 
             setSuccess(
-                data.message ||
+                data?.message ||
                     (isEditMode
                         ? "Company updated successfully."
                         : "Company created successfully.")
             );
-
-            if (!isEditMode) {
-                setFormData(initialFormState);
-            }
         } catch (err) {
             const message =
                 err.response?.data?.message ||
@@ -196,6 +209,7 @@ const CreateCompany = () => {
     return (
         <div className="create-company-page">
             <div className="create-company-card">
+
                 <div className="create-company-topbar">
                     <h1>
                         {isEditMode
@@ -235,10 +249,30 @@ const CreateCompany = () => {
                         className="create-company-form"
                         onSubmit={handleSubmit}
                     >
+
                         <div className="cc-section">
+
                             <h2>Basic Information</h2>
 
+                            <div className="form-group">
+                                <label htmlFor="companyId">
+                                    Company ID
+                                </label>
+
+                                <input
+                                    id="companyId"
+                                        className="readonly-field"
+
+                                    value={
+                                        formData.companyId ||
+                                        "Generated automatically"
+                                    }
+                                    readOnly
+                                />
+                            </div>
+
                             <div className="cc-grid">
+
                                 <div className="form-group">
                                     <label htmlFor="companyName">
                                         Company Name *
@@ -247,7 +281,9 @@ const CreateCompany = () => {
                                     <input
                                         id="companyName"
                                         name="companyName"
-                                        value={formData.companyName}
+                                        value={
+                                            formData.companyName
+                                        }
                                         onChange={handleChange}
                                         placeholder="Enter company name"
                                     />
@@ -261,7 +297,9 @@ const CreateCompany = () => {
                                     <input
                                         id="companyCode"
                                         name="companyCode"
-                                        value={formData.companyCode}
+                                        value={
+                                            formData.companyCode
+                                        }
                                         onChange={handleChange}
                                         placeholder="Enter company code"
                                     />
@@ -275,7 +313,9 @@ const CreateCompany = () => {
                                     <input
                                         id="companyLogo"
                                         name="companyLogo"
-                                        value={formData.companyLogo}
+                                        value={
+                                            formData.companyLogo
+                                        }
                                         onChange={handleChange}
                                         placeholder="Enter logo URL"
                                     />
@@ -289,21 +329,25 @@ const CreateCompany = () => {
                                     <select
                                         id="companyType"
                                         name="companyType"
-                                        value={formData.companyType}
+                                        value={
+                                            formData.companyType
+                                        }
                                         onChange={handleChange}
                                     >
                                         <option value="">
                                             Select company type
                                         </option>
 
-                                        {COMPANY_TYPES.map((type) => (
-                                            <option
-                                                key={type}
-                                                value={type}
-                                            >
-                                                {type}
-                                            </option>
-                                        ))}
+                                        {COMPANY_TYPES.map(
+                                            (type) => (
+                                                <option
+                                                    key={type}
+                                                    value={type}
+                                                >
+                                                    {type}
+                                                </option>
+                                            )
+                                        )}
                                     </select>
                                 </div>
 
@@ -315,7 +359,9 @@ const CreateCompany = () => {
                                     <input
                                         id="industry"
                                         name="industry"
-                                        value={formData.industry}
+                                        value={
+                                            formData.industry
+                                        }
                                         onChange={handleChange}
                                         placeholder="Enter industry"
                                     />
@@ -329,7 +375,9 @@ const CreateCompany = () => {
                                     <select
                                         id="status"
                                         name="status"
-                                        value={formData.status}
+                                        value={
+                                            formData.status
+                                        }
                                         onChange={handleChange}
                                     >
                                         <option value="active">
@@ -345,13 +393,16 @@ const CreateCompany = () => {
                                         </option>
                                     </select>
                                 </div>
+
                             </div>
                         </div>
 
                         <div className="cc-section">
+
                             <h2>Contact Information</h2>
 
                             <div className="cc-grid">
+
                                 <div className="form-group">
                                     <label htmlFor="officialEmail">
                                         Official Email *
@@ -361,7 +412,9 @@ const CreateCompany = () => {
                                         id="officialEmail"
                                         name="officialEmail"
                                         type="email"
-                                        value={formData.officialEmail}
+                                        value={
+                                            formData.officialEmail
+                                        }
                                         onChange={handleChange}
                                         placeholder="Enter official email"
                                     />
@@ -375,7 +428,9 @@ const CreateCompany = () => {
                                     <input
                                         id="contactNumber"
                                         name="contactNumber"
-                                        value={formData.contactNumber}
+                                        value={
+                                            formData.contactNumber
+                                        }
                                         onChange={handleChange}
                                         placeholder="Enter contact number"
                                     />
@@ -389,18 +444,23 @@ const CreateCompany = () => {
                                     <input
                                         id="website"
                                         name="website"
-                                        value={formData.website}
+                                        value={
+                                            formData.website
+                                        }
                                         onChange={handleChange}
                                         placeholder="https://example.com"
                                     />
                                 </div>
+
                             </div>
                         </div>
 
                         <div className="cc-section">
+
                             <h2>Address</h2>
 
                             <div className="cc-grid">
+
                                 <div className="form-group cc-full">
                                     <label htmlFor="addressLine1">
                                         Address *
@@ -409,7 +469,9 @@ const CreateCompany = () => {
                                     <input
                                         id="addressLine1"
                                         name="addressLine1"
-                                        value={formData.addressLine1}
+                                        value={
+                                            formData.addressLine1
+                                        }
                                         onChange={handleChange}
                                         placeholder="Enter address"
                                     />
@@ -451,7 +513,9 @@ const CreateCompany = () => {
                                     <input
                                         id="country"
                                         name="country"
-                                        value={formData.country}
+                                        value={
+                                            formData.country
+                                        }
                                         onChange={handleChange}
                                         placeholder="Enter country"
                                     />
@@ -465,18 +529,23 @@ const CreateCompany = () => {
                                     <input
                                         id="pincode"
                                         name="pincode"
-                                        value={formData.pincode}
+                                        value={
+                                            formData.pincode
+                                        }
                                         onChange={handleChange}
                                         placeholder="Enter pincode"
                                     />
                                 </div>
+
                             </div>
                         </div>
 
                         <div className="cc-section">
+
                             <h2>Working Information</h2>
 
                             <div className="cc-grid">
+
                                 <div className="form-group">
                                     <label htmlFor="timeZone">
                                         Time Zone *
@@ -485,7 +554,9 @@ const CreateCompany = () => {
                                     <input
                                         id="timeZone"
                                         name="timeZone"
-                                        value={formData.timeZone}
+                                        value={
+                                            formData.timeZone
+                                        }
                                         onChange={handleChange}
                                         placeholder="e.g. Asia/Kolkata"
                                     />
@@ -499,7 +570,9 @@ const CreateCompany = () => {
                                     <input
                                         id="currency"
                                         name="currency"
-                                        value={formData.currency}
+                                        value={
+                                            formData.currency
+                                        }
                                         onChange={handleChange}
                                         placeholder="e.g. INR"
                                     />
@@ -514,7 +587,9 @@ const CreateCompany = () => {
                                         id="officeStartTime"
                                         name="officeStartTime"
                                         type="time"
-                                        value={formData.officeStartTime}
+                                        value={
+                                            formData.officeStartTime
+                                        }
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -528,17 +603,21 @@ const CreateCompany = () => {
                                         id="officeEndTime"
                                         name="officeEndTime"
                                         type="time"
-                                        value={formData.officeEndTime}
+                                        value={
+                                            formData.officeEndTime
+                                        }
                                         onChange={handleChange}
                                     />
                                 </div>
 
                                 <div className="form-group cc-full">
+
                                     <label>
                                         Working Days *
                                     </label>
 
                                     <div className="working-days">
+
                                         {DAYS.map((day) => (
                                             <label
                                                 key={day}
@@ -556,11 +635,16 @@ const CreateCompany = () => {
                                                     }
                                                 />
 
-                                                <span>{day}</span>
+                                                <span>
+                                                    {day}
+                                                </span>
                                             </label>
                                         ))}
+
                                     </div>
+
                                 </div>
+
                             </div>
                         </div>
 
@@ -577,8 +661,10 @@ const CreateCompany = () => {
                                 ? "Update Company"
                                 : "Create Company"}
                         </button>
+
                     </form>
                 )}
+
             </div>
         </div>
     );

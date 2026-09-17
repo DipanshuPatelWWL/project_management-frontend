@@ -127,7 +127,7 @@ const Companies = () => {
                             <table className="companies-table">
                                 <thead>
                                     <tr>
-                                        <th>Code</th>
+                                        <th>CompanyId</th>
                                         <th>Name</th>
                                         <th>Type</th>
                                         <th>Industry</th>
@@ -141,7 +141,7 @@ const Companies = () => {
                                 <tbody>
                                     {paginatedCompanies.map((c) => (
                                         <tr key={c._id}>
-                                            <td>{c.companyCode || "-"}</td>
+                                            <td>{c.companyId|| "-"}</td>
 
                                             <td>{c.companyName || "-"}</td>
 
