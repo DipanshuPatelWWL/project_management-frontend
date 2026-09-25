@@ -13,15 +13,18 @@ export const getSprints = async (params = {}) => {
     return res.data;
 };
 
+
 export const getSprintById = async (sprintId) => {
     const res = await api.get(`/${sprintId}`);
     return res.data;
 };
 
+
 export const createSprint = async (sprintData) => {
     const res = await api.post("/", sprintData);
     return res.data;
 };
+
 
 export const updateSprint = async (sprintId, sprintData) => {
     const res = await api.put(`/${sprintId}`, sprintData);
