@@ -2,6 +2,8 @@ import { useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import NotificationBell from "./NotificationBell";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 const PAGE_TITLES = {
     "/dashboard": "Dashboard",
     "/users": "Users",
@@ -50,7 +52,7 @@ const Header = ({ onProfileClick }) => {
                         <span className="w-8 h-8 rounded-full bg-[#5865f2] text-white flex items-center justify-center text-[13px] font-bold uppercase overflow-hidden shrink-0">
                             {user.profileImage ? (
                                 <img
-                                    src={`http://localhost:5000${user.profileImage}`}
+                                    src={user.profileImage.startsWith("http") ? user.profileImage : `${API_BASE_URL}${user.profileImage}`}
                                     alt="Avatar"
                                     className="w-full h-full object-cover"
                                 />

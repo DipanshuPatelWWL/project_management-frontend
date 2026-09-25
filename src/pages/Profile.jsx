@@ -13,6 +13,8 @@ import {
 } from "react-icons/fi";
 import * as userService from "../services/userService";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 const Profile = () => {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
@@ -100,7 +102,7 @@ const Profile = () => {
                     src={
                       user.profileImage.startsWith("http")
                         ? user.profileImage
-                        : `http://localhost:5000${user.profileImage}`
+                        : `${API_BASE_URL}${user.profileImage}`
                     }
                     alt={fullName || "User"}
                     className="w-full h-full object-cover rounded-full"

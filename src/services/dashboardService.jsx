@@ -1,22 +1,24 @@
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 const dashboardApi = axios.create({
-    baseURL: "http://localhost:5000/api/dashboard",
+    baseURL: `${API_BASE_URL}/api/dashboard`,
     withCredentials: true,
 });
 
 const projectApi = axios.create({
-    baseURL: "http://localhost:5000/api/project",
+    baseURL: `${API_BASE_URL}/api/project`,
     withCredentials: true,
 });
 
 const taskApi = axios.create({
-    baseURL: "http://localhost:5000/api/task",
+    baseURL: `${API_BASE_URL}/api/task`,
     withCredentials: true,
 });
 
 const meetingApi = axios.create({
-    baseURL: "http://localhost:5000/api/meeting",
+    baseURL: `${API_BASE_URL}/api/meeting`,
     withCredentials: true,
 });
 
