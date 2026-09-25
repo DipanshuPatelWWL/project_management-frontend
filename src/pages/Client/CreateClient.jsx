@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as clientService from "../../services/clientService";
-import * as companyService from "../../services/companyService";
+import * as companyService from "../../services/CompanyService";
 import Loader from "../../components/Loader";
 import {
   isValidEmail,
@@ -147,7 +147,7 @@ const CreateClient = () => {
       all.find(
         (c) =>
           c.name.toLowerCase() === formData.country.trim().toLowerCase() ||
-          c.isoCode.toLowerCase() === formData.country.trim().toLowerCase()
+          c.isoCode.toLowerCase() === formData.country.trim().toLowerCase(),
       ) || null
     );
   }, [formData.country]);
@@ -181,7 +181,7 @@ const CreateClient = () => {
       statesOfCountry.find(
         (s) =>
           s.name.toLowerCase() === formData.state.trim().toLowerCase() ||
-          s.isoCode.toLowerCase() === formData.state.trim().toLowerCase()
+          s.isoCode.toLowerCase() === formData.state.trim().toLowerCase(),
       ) || null
     );
   }, [statesOfCountry, formData.state]);
@@ -190,7 +190,7 @@ const CreateClient = () => {
     if (!selectedCountryObj || !selectedStateObj) return [];
     return City.getCitiesOfState(
       selectedCountryObj.isoCode,
-      selectedStateObj.isoCode
+      selectedStateObj.isoCode,
     );
   }, [selectedCountryObj, selectedStateObj]);
 
@@ -206,7 +206,7 @@ const CreateClient = () => {
   const handleCountryChange = (e) => {
     const selectedCountryName = e.target.value;
     const countryObj = Country.getAllCountries().find(
-      (c) => c.name.toLowerCase() === selectedCountryName.trim().toLowerCase()
+      (c) => c.name.toLowerCase() === selectedCountryName.trim().toLowerCase(),
     );
 
     setFormData((prev) => ({
@@ -620,11 +620,7 @@ const CreateClient = () => {
                   Select Country
                 </option>
                 {countryOptions.map((c) => (
-                  <option
-                    key={c}
-                    value={c}
-                    className="bg-[#171b2e] text-white"
-                  >
+                  <option key={c} value={c} className="bg-[#171b2e] text-white">
                     {c}
                   </option>
                 ))}
@@ -652,11 +648,7 @@ const CreateClient = () => {
                   {!formData.country ? "Select Country First" : "Select State"}
                 </option>
                 {stateOptions.map((s) => (
-                  <option
-                    key={s}
-                    value={s}
-                    className="bg-[#171b2e] text-white"
-                  >
+                  <option key={s} value={s} className="bg-[#171b2e] text-white">
                     {s}
                   </option>
                 ))}

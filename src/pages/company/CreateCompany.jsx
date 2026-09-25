@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import * as companyService from "../../services/companyService";
+import * as companyService from "../../services/CompanyService";
 import Loader from "../../components/Loader";
 import {
   isValidEmail,
@@ -146,7 +146,7 @@ const CreateCompany = () => {
       all.find(
         (c) =>
           c.name.toLowerCase() === formData.country.trim().toLowerCase() ||
-          c.isoCode.toLowerCase() === formData.country.trim().toLowerCase()
+          c.isoCode.toLowerCase() === formData.country.trim().toLowerCase(),
       ) || null
     );
   }, [formData.country]);
@@ -180,7 +180,7 @@ const CreateCompany = () => {
       statesOfCountry.find(
         (s) =>
           s.name.toLowerCase() === formData.state.trim().toLowerCase() ||
-          s.isoCode.toLowerCase() === formData.state.trim().toLowerCase()
+          s.isoCode.toLowerCase() === formData.state.trim().toLowerCase(),
       ) || null
     );
   }, [statesOfCountry, formData.state]);
@@ -189,7 +189,7 @@ const CreateCompany = () => {
     if (!selectedCountryObj || !selectedStateObj) return [];
     return City.getCitiesOfState(
       selectedCountryObj.isoCode,
-      selectedStateObj.isoCode
+      selectedStateObj.isoCode,
     );
   }, [selectedCountryObj, selectedStateObj]);
 
@@ -220,7 +220,7 @@ const CreateCompany = () => {
   const handleCountryChange = (e) => {
     const selectedCountryName = e.target.value;
     const countryObj = Country.getAllCountries().find(
-      (c) => c.name.toLowerCase() === selectedCountryName.trim().toLowerCase()
+      (c) => c.name.toLowerCase() === selectedCountryName.trim().toLowerCase(),
     );
 
     const defaultTz = countryObj?.timezones?.[0]?.zoneName || "";
@@ -302,7 +302,11 @@ const CreateCompany = () => {
       ...prev,
       [name]: sanitizedValue,
     }));
-    if (fieldErrors[name] || fieldErrors.officeStartTime || fieldErrors.officeEndTime) {
+    if (
+      fieldErrors[name] ||
+      fieldErrors.officeStartTime ||
+      fieldErrors.officeEndTime
+    ) {
       setFieldErrors((prev) => {
         const next = { ...prev };
         delete next[name];
@@ -432,14 +436,15 @@ const CreateCompany = () => {
         setSuccess(
           createdId
             ? `Company created successfully. Company ID: ${createdId}`
-            : "Company created successfully."
+            : "Company created successfully.",
         );
         setFormData(initialFormState);
         await loadNextCompanyId();
       }
     } catch (err) {
       setError(
-        err.response?.data?.message || "Something went wrong. Please try again."
+        err.response?.data?.message ||
+          "Something went wrong. Please try again.",
       );
     } finally {
       setSubmitting(false);
@@ -818,7 +823,10 @@ const CreateCompany = () => {
                     <input
                       id="city"
                       name="city"
-                      className={getInputClass(fieldErrors.city, !formData.state)}
+                      className={getInputClass(
+                        fieldErrors.city,
+                        !formData.state,
+                      )}
                       value={formData.city}
                       onChange={handleChange}
                       disabled={!formData.state}
@@ -1005,8 +1013,8 @@ const CreateCompany = () => {
                 ? "Saving..."
                 : "Creating..."
               : isEditMode
-              ? "Save Changes"
-              : "Create Company"}
+                ? "Save Changes"
+                : "Create Company"}
           </button>
         </form>
       </div>

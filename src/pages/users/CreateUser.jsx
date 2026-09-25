@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as userService from "../../services/userService";
-import * as companyService from "../../services/companyService";
+import * as companyService from "../../services/CompanyService";
 import { useAuth } from "../../context/AuthContext";
 import Loader from "../../components/Loader";
 import {

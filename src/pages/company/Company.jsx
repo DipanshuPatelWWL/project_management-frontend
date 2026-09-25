@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import * as companyService from "../../services/companyService";
+import * as companyService from "../../services/CompanyService";
 import Loader from "../../components/Loader";
 
 const PAGE_SIZE = 10;

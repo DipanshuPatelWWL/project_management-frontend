@@ -8,7 +8,7 @@ import {
   getProjects,
 } from "../../services/projectService";
 
-import { getCompanies } from "../../services/companyService";
+import { getCompanies } from "../../services/CompanyService";
 import { getClients } from "../../services/clientService";
 import { getUsers } from "../../services/userService";
 import Loader from "../../components/Loader";
@@ -184,7 +184,12 @@ const CreateProject = () => {
       [name]: type === "checkbox" ? checked : value,
     }));
 
-    if (fieldErrors[name] || fieldErrors.startDate || fieldErrors.endDate || fieldErrors.deadline) {
+    if (
+      fieldErrors[name] ||
+      fieldErrors.startDate ||
+      fieldErrors.endDate ||
+      fieldErrors.deadline
+    ) {
       setFieldErrors((prev) => {
         const next = { ...prev };
         delete next[name];
