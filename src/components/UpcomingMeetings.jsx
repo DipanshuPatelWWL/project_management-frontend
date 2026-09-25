@@ -1,6 +1,6 @@
 import Loader from "./Loader";
 
-const RecentNotifications = ({ notifications, loading, error }) => {
+const UpcomingMeetings = ({ meetings, loading, error }) => {
     if (loading) return <Loader size="sm" />;
     if (error) {
         return (
@@ -9,10 +9,10 @@ const RecentNotifications = ({ notifications, loading, error }) => {
             </p>
         );
     }
-    if (!notifications || notifications.length === 0) {
+    if (!meetings || meetings.length === 0) {
         return (
             <p className="p-[55px_20px] text-center text-[#7f8aa5] bg-[#171b2e] rounded-xl border border-[#282e45] m-0">
-                No notifications found.
+                No upcoming meetings.
             </p>
         );
     }
@@ -23,44 +23,43 @@ const RecentNotifications = ({ notifications, loading, error }) => {
                 <thead>
                     <tr>
                         <th className="py-[15px] px-[18px] text-left text-[#8f9bb3] text-[11px] font-bold uppercase tracking-[0.06em] bg-[#1c2136] border-b border-[#282e45] whitespace-nowrap first:rounded-tl-xl">
-                            Notification
-                        </th>
-                        <th className="py-[15px] px-[18px] text-left text-[#8f9bb3] text-[11px] font-bold uppercase tracking-[0.06em] bg-[#1c2136] border-b border-[#282e45] whitespace-nowrap">
-                            Type
+                            Meeting Title
                         </th>
                         <th className="py-[15px] px-[18px] text-left text-[#8f9bb3] text-[11px] font-bold uppercase tracking-[0.06em] bg-[#1c2136] border-b border-[#282e45] whitespace-nowrap">
                             Date
                         </th>
+                        <th className="py-[15px] px-[18px] text-left text-[#8f9bb3] text-[11px] font-bold uppercase tracking-[0.06em] bg-[#1c2136] border-b border-[#282e45] whitespace-nowrap">
+                            Time
+                        </th>
+                        <th className="py-[15px] px-[18px] text-left text-[#8f9bb3] text-[11px] font-bold uppercase tracking-[0.06em] bg-[#1c2136] border-b border-[#282e45] whitespace-nowrap">
+                            Project
+                        </th>
                         <th className="py-[15px] px-[18px] text-left text-[#8f9bb3] text-[11px] font-bold uppercase tracking-[0.06em] bg-[#1c2136] border-b border-[#282e45] whitespace-nowrap last:rounded-tr-xl">
-                            Read/Unread
+                            Participants
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {notifications.map((n) => (
-                        <tr
-                            key={n._id}
-                            className={`transition-colors last:[&>td]:border-b-0 ${
-                                n.isRead
-                                    ? "hover:bg-[#1c2136]"
-                                    : "bg-[#1e2c42] font-semibold hover:bg-[#24304a]"
-                            }`}
-                        >
+                    {meetings.map((meeting) => (
+                        <tr key={meeting._id} className="hover:bg-[#1c2136] transition-colors last:[&>td]:border-b-0">
                             <td className="py-[15px] px-[18px] text-[#e8ebf5] border-b border-[#282e45]">
-                                {n.message || n.title}
+                                {meeting.meetingTitle}
                             </td>
                             <td className="py-[15px] px-[18px] text-[#e8ebf5] border-b border-[#282e45]">
-                                {n.type}
-                            </td>
-                            <td className="py-[15px] px-[18px] text-[#e8ebf5] border-b border-[#282e45]">
-                                {n.createdAt
-                                    ? new Date(n.createdAt).toLocaleDateString()
+                                {meeting.meetingDate
+                                    ? new Date(meeting.meetingDate).toLocaleDateString()
                                     : "—"}
                             </td>
                             <td className="py-[15px] px-[18px] text-[#e8ebf5] border-b border-[#282e45]">
-                                <span className={n.isRead ? "text-[#7f8aa5] text-[12px]" : "text-[#9fb0ff] font-bold text-[12px]"}>
-                                    {n.isRead ? "Read" : "Unread"}
-                                </span>
+                                {meeting.startTime || "—"}
+                            </td>
+                            <td className="py-[15px] px-[18px] text-[#e8ebf5] border-b border-[#282e45]">
+                                {meeting.project?.projectName || "—"}
+                            </td>
+                            <td className="py-[15px] px-[18px] text-[#e8ebf5] border-b border-[#282e45]">
+                                {meeting.participants
+                                    ? `${meeting.participants.firstName} ${meeting.participants.lastName}`
+                                    : "—"}
                             </td>
                         </tr>
                     ))}
@@ -70,4 +69,4 @@ const RecentNotifications = ({ notifications, loading, error }) => {
     );
 };
 
-export default RecentNotifications;
+export default UpcomingMeetings;

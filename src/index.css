@@ -1,2 +1,135 @@
 @import "tailwindcss";
 
+/* Global pagination page indicator text color */
+.companies-pagination span,
+.users-pagination span,
+.project-pagination span,
+.clients-pagination span,
+.sprint-pagination span {
+    color: #8f9bb3 !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+}
+
+/* Universal Form Field Error - Red outline */
+.field-error,
+input.field-error,
+select.field-error,
+textarea.field-error {
+    border-color: #ef4444 !important;
+    outline: 1px solid #ef4444 !important;
+    box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.4) !important;
+}
+
+/* Date & Time input calendar picker styling for dark theme */
+input[type="date"],
+input[type="datetime-local"],
+input[type="time"] {
+    color-scheme: dark;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    cursor: pointer;
+    opacity: 0.9;
+    filter: none !important;
+    transition: opacity 0.2s ease;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cpolyline points='12 6 12 12 16 14'%3E%3C/polyline%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    cursor: pointer;
+    opacity: 0.9;
+    filter: none !important;
+    transition: opacity 0.2s ease;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover,
+input[type="time"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+/* Date input format placeholder text styling */
+input[type="date"]::-webkit-datetime-edit,
+input[type="date"]::-webkit-datetime-edit-fields-wrapper,
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+    color: #cbd2e3;
+}
+input[type="date"]:focus::-webkit-datetime-edit,
+input[type="date"]:valid::-webkit-datetime-edit {
+    color: #ffffff;
+}
+
+/* Universal Loading Spinner & Container */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 36px 0;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.loader-fullscreen {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #0d0f1a;
+    z-index: 9999;
+}
+
+.spinner {
+    width: 36px;
+    height: 36px;
+    border: 3.5px solid rgba(88, 101, 242, 0.16);
+    border-top-color: #5865f2;
+    border-radius: 50%;
+    animation: app-spinner-rotate 0.75s linear infinite;
+    box-sizing: border-box;
+}
+
+.spinner-sm {
+    width: 22px;
+    height: 22px;
+    border-width: 2.5px;
+}
+
+.spinner-lg {
+    width: 48px;
+    height: 48px;
+    border-width: 4px;
+}
+
+.loader-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: #8f9bb3;
+    letter-spacing: 0.02em;
+}
+
+@keyframes app-spinner-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+

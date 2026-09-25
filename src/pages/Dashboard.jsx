@@ -8,8 +8,7 @@ import RecentProjects from "../components/RecentProjects";
 import RecentTasks from "../components/RecentTasks";
 import UpcomingMeetings from "../components/UpcomingMeetings";
 import RecentNotifications from "../components/RecentNotifications";
-import "./Dashboard.css";
-
+import Loader from "../components/Loader";
 
 const Dashboard = () => {
     const { user } = useAuth();
@@ -142,12 +141,14 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <div className="dashboard-page">
-            <div className="dashboard-top">
+        <div className="w-full min-w-0 p-4 sm:p-[22px] md:p-[28px] box-border bg-[#0d0f1a] text-white min-h-screen">
+            <div className="flex flex-col sm:flex-row justify-between items-start gap-6 mb-[30px]">
                 <div>
-                    <h1>Dashboard</h1>
+                    <h1 className="m-0 text-[23px] md:text-[28px] font-[750] tracking-[-0.6px] text-white">
+                        Dashboard
+                    </h1>
                     {user && (
-                        <p className="welcome-text">
+                        <p className="mt-2 mb-0 text-[#8f9bb3] text-[14px] leading-[1.5]">
                             Welcome, {user.firstName || user.email}
                         </p>
                     )}
@@ -155,21 +156,27 @@ const Dashboard = () => {
 
                 {isAdmin && (
                     <button
-                        className="create-user-button"
+                        className="relative overflow-hidden h-[42px] px-[17px] rounded-lg text-[13px] font-[650] cursor-pointer transition-all duration-200 bg-[#5865f2] text-white border border-[#5865f2] shadow-[0_4px_12px_rgba(37,99,235,0.18)] hover:bg-[#4752c4] hover:border-[#4752c4] hover:shadow-[0_7px_18px_rgba(37,99,235,0.25)] hover:-translate-y-px active:translate-y-px"
                         onClick={() => navigate("/users")}
                     >
-                         Users
+                        Users
                     </button>
                 )}
             </div>
 
             {/* Statistics Cards */}
-            <section className="dashboard-section">
-                <h2>Overview</h2>
-                {statsLoading && <p>Loading statistics...</p>}
-                {statsError && <p className="dashboard-error">{statsError}</p>}
+            <section className="mb-[30px]">
+                <h2 className="m-0 mb-[15px] text-white text-[17px] font-bold tracking-[-0.2px]">
+                    Overview
+                </h2>
+                {statsLoading && <Loader size="sm" />}
+                {statsError && (
+                    <p className="flex items-center gap-2.5 mb-[22px] py-3.5 px-4 border border-[rgba(220,38,38,0.35)] rounded-[9px] bg-[rgba(220,38,38,0.12)] text-[#ff9da9] text-[13px] shadow-[0_2px_8px_rgba(0,0,0,0.15)]">
+                        {statsError}
+                    </p>
+                )}
                 {!statsLoading && !statsError && stats && (
-                    <div className="stats-grid">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
                         <StatCard label="Total Projects" value={stats.totalProjects} />
                         <StatCard label="Total Tasks" value={stats.totalTasks} />
                         <StatCard label="Completed Tasks" value={stats.completedTasks} />
@@ -181,8 +188,10 @@ const Dashboard = () => {
             </section>
 
             {/* Recent Projects */}
-            <section className="dashboard-section">
-                <h2>Recent Projects</h2>
+            <section className="mb-[30px]">
+                <h2 className="m-0 mb-[15px] text-white text-[17px] font-bold tracking-[-0.2px]">
+                    Recent Projects
+                </h2>
                 <RecentProjects
                     projects={recentProjects}
                     loading={projectsLoading}
@@ -191,8 +200,10 @@ const Dashboard = () => {
             </section>
 
             {/* Recent Tasks */}
-            <section className="dashboard-section">
-                <h2>Recent Tasks</h2>
+            <section className="mb-[30px]">
+                <h2 className="m-0 mb-[15px] text-white text-[17px] font-bold tracking-[-0.2px]">
+                    Recent Tasks
+                </h2>
                 <RecentTasks
                     tasks={recentTasks}
                     loading={tasksLoading}
@@ -201,8 +212,10 @@ const Dashboard = () => {
             </section>
 
             {/* Upcoming Meetings */}
-            <section className="dashboard-section">
-                <h2>Upcoming Meetings</h2>
+            <section className="mb-[30px]">
+                <h2 className="m-0 mb-[15px] text-white text-[17px] font-bold tracking-[-0.2px]">
+                    Upcoming Meetings
+                </h2>
                 <UpcomingMeetings
                     meetings={upcomingMeetings}
                     loading={meetingsLoading}
@@ -211,8 +224,10 @@ const Dashboard = () => {
             </section>
 
             {/* Recent Notifications */}
-            <section className="dashboard-section">
-                <h2>Recent Notifications</h2>
+            <section className="mb-[30px]">
+                <h2 className="m-0 mb-[15px] text-white text-[17px] font-bold tracking-[-0.2px]">
+                    Recent Notifications
+                </h2>
                 <RecentNotifications
                     notifications={recentNotifications}
                     loading={notificationsLoading}

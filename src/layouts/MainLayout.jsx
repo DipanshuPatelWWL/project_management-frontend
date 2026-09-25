@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
-import "./MainLayout.css";
 
 const MainLayout = () => {
     const navigate = useNavigate();
@@ -18,7 +17,7 @@ const MainLayout = () => {
     };
 
     return (
-        <div className="main-layout">
+        <div className="flex w-full h-screen overflow-hidden bg-[#0d0f1a]">
 
             <Sidebar
                 onProfileClick={openProfile}
@@ -26,11 +25,11 @@ const MainLayout = () => {
                 onToggle={toggleSidebar}
             />
 
-            <div className="main-layout-content">
+            <div className="flex-1 min-w-0 min-h-0 h-screen flex flex-col overflow-hidden transition-[width] duration-[280ms] ease-in-out">
 
                 <Header onProfileClick={openProfile} />
 
-                <main className="main-layout-body">
+                <main className="p-6 flex-1 min-w-0 min-h-0 bg-[#0d0f1a] overflow-y-auto overflow-x-hidden box-border">
                     <Outlet />
                 </main>
 

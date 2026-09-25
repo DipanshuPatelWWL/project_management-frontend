@@ -29,3 +29,18 @@ export const updateUser = async (userId, userData) => {
     const res = await api.put(`/${userId}`, userData);
     return res.data;
 };
+
+export const updateUserStatus = async (userId, status) => {
+    const res = await api.patch(`/${userId}/status`, { status });
+    return res.data;
+};
+
+export const updateUserRole = async (userId, role) => {
+    const res = await api.patch(`/${userId}/role`, { role });
+    return res.data;
+};
+
+export const updateProfileImage = async (formData) => {
+    const res = await api.put("/profile/image", formData);
+    return res.data;
+};
