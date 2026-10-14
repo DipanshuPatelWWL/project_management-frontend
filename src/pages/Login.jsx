@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const Login = () => {
     const { login } = useAuth();
@@ -10,6 +11,7 @@ const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = (e) => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -62,15 +64,25 @@ const Login = () => {
 
                     <div className="flex flex-col gap-1.5">
                         <label htmlFor="password" className="text-[13px] font-semibold text-[#374151]">Password</label>
-                        <input
-                            id="password"
-                            name="password"
-                            type="password"
-                            placeholder="Enter your password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            className="py-2.5 px-3 border border-[#d1d5db] rounded-lg text-[14px] text-gray-900 outline-none transition-colors duration-150 focus:border-[#4f46e5]"
-                        />
+                        <div className="relative w-full">
+                            <input
+                                id="password"
+                                name="password"
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Enter your password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                className="w-full py-2.5 pl-3 pr-10 border border-[#d1d5db] rounded-lg text-[14px] text-gray-900 outline-none transition-colors duration-150 focus:border-[#4f46e5]"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword((prev) => !prev)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6b7280] hover:text-[#111827] transition-colors duration-150 p-1 cursor-pointer bg-transparent border-0 flex items-center justify-center focus:outline-none"
+                                aria-label={showPassword ? "Hide password" : "Show password"}
+                            >
+                                {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
+                            </button>
+                        </div>
                     </div>
 
                     <button

@@ -15,10 +15,14 @@ const PAGE_TITLES = {
     "/sprints": "Sprints",
     "/sprints/create": "Create Sprint",
     "/tasks": "Tasks",
+    "/tasks/create": "Create Task",
     "/bugs": "Bugs",
+    "/bugs/create": "Report Bug",
     "/timelogs": "Time Logs",
     "/meetings": "Meetings",
     "/documents": "Documents",
+    "/notifications": "Notifications",
+    "/notification": "Notifications",
     "/reports": "Reports",
 };
 
@@ -32,6 +36,12 @@ const Header = ({ onProfileClick }) => {
             pageTitle = "Edit Sprint";
         } else if (location.pathname.startsWith("/sprints/")) {
             pageTitle = "Sprint Details";
+        } else if (location.pathname.startsWith("/tasks/edit")) {
+            pageTitle = "Edit Task";
+        } else if (location.pathname.startsWith("/bugs/edit") || (location.pathname.startsWith("/bugs/") && location.pathname.endsWith("/edit"))) {
+            pageTitle = "Edit Bug";
+        } else if (location.pathname.startsWith("/bugs/")) {
+            pageTitle = "Bug Details";
         } else {
             pageTitle = "Project Management";
         }

@@ -4,6 +4,7 @@ import * as userService from "../../services/userService";
 import * as companyService from "../../services/CompanyService";
 import { useAuth } from "../../context/AuthContext";
 import Loader from "../../components/Loader";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import {
   isValidEmail,
   isValidPhone,
@@ -76,6 +77,7 @@ const CreateUser = () => {
   const [success, setSuccess] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
 
   // Load companies
   useEffect(() => {
@@ -441,19 +443,29 @@ const CreateUser = () => {
                 Password {!isEditMode && "*"}
               </label>
 
-              <input
-                id="password"
-                name="password"
-                type="password"
-                className={getInputClass(fieldErrors.password)}
-                value={formData.password}
-                onChange={handleChange}
-                placeholder={
-                  isEditMode
-                    ? "Leave blank to keep current password"
-                    : "Min 8 chars (A-Z, a-z, 0-9, special char)"
-                }
-              />
+              <div className="relative w-full">
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  className={`${getInputClass(fieldErrors.password)} !pr-10`}
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder={
+                    isEditMode
+                      ? "Leave blank to keep current password"
+                      : "Min 8 chars (A-Z, a-z, 0-9, special char)"
+                  }
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7f8aa5] hover:text-white transition-colors duration-150 p-1 cursor-pointer bg-transparent border-0 flex items-center justify-center focus:outline-none"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
+                </button>
+              </div>
             </div>
 
             {/* Role */}

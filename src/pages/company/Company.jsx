@@ -24,6 +24,7 @@ const Companies = () => {
     setError("");
 
     try {
+
       const data = await companyService.getCompanies();
       setCompanies(data.companies || data || []);
     } catch (err) {

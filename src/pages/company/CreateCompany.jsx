@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as companyService from "../../services/CompanyService";
 import Loader from "../../components/Loader";
-import {
+import{
   isValidEmail,
   isValidPhone,
   isValidPincode,
@@ -12,13 +12,18 @@ import { Country, State, City } from "country-state-city";
 
 const inputBaseClass =
   "w-full h-11 px-[13px] border border-[#30364d] rounded-[7px] bg-[#0f1322] text-white text-[14px] outline-none box-border transition-all duration-200 hover:border-[#4a5475] focus:border-[#5969a8] focus:ring-2 focus:ring-[#5969a8]/20 placeholder:text-[#7f8aa5]";
+
+
 const readonlyClass = "cursor-not-allowed !bg-[#111522] !text-[#8f9ab5]";
+
+
 const getInputClass = (hasError, isReadonly = false) => {
   let cls = inputBaseClass;
   if (isReadonly) cls += ` ${readonlyClass}`;
   if (hasError) cls += " field-error";
   return cls;
 };
+
 
 const COMPANY_TYPES = [
   "Private",
@@ -27,6 +32,7 @@ const COMPANY_TYPES = [
   "LLP",
   "Proprietorship",
 ];
+
 
 const DAYS = [
   "Monday",
@@ -73,6 +79,19 @@ const CreateCompany = () => {
   const [submitting, setSubmitting] = useState(false);
   const [loadingCompany, setLoadingCompany] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
+  const [showPopup, setShowPopup] = useState(false);
+  const [newName, setNewName] = useState("");
+  const [popupError, setPopupError] = useState("");
+
+  const handlePopupSubmit = (e) => {
+    if (e) e.preventDefault();
+    if (!newName.trim()) {
+      setPopupError("Please fill all required fields");
+      return;
+    }
+    setPopupError("");
+    setShowPopup(false);
+  };
 
   const loadNextCompanyId = async () => {
     try {
@@ -88,7 +107,7 @@ const CreateCompany = () => {
       console.error("Failed to load next Company ID:", error);
     }
   };
-
+    
   useEffect(() => {
     if (!isEditMode) {
       loadNextCompanyId();
@@ -99,7 +118,7 @@ const CreateCompany = () => {
       setLoadingCompany(true);
       setError("");
 
-      try {
+      try {  
         const data = await companyService.getCompanyById(companyId);
 
         const company = data.company || data;
@@ -1003,20 +1022,114 @@ const CreateCompany = () => {
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="block w-[180px] max-sm:w-full h-11 mt-6 ml-auto border-none rounded-[7px] bg-[#5865f2] text-white text-[14px] font-semibold cursor-pointer transition-all duration-200 hover:bg-[#4752c4] active:translate-y-px disabled:opacity-60 disabled:cursor-not-allowed"
-            disabled={submitting}
-          >
-            {submitting
-              ? isEditMode
-                ? "Saving..."
-                : "Creating..."
-              : isEditMode
-                ? "Save Changes"
-                : "Create Company"}
-          </button>
+          <div className="flex justify-end items-center max-sm:flex-col gap-3.5 mt-8 pt-5 border-t border-[#30364d]">
+            <button
+              type="button"
+              onClick={() => {
+                setPopupError("");
+                setShowPopup(true);
+              }}
+              className="py-2.5 px-5 max-sm:w-full border border-[#30364d] rounded-[7px] bg-[#20253a] text-[#e8ebf5] text-[14px] font-medium cursor-pointer transition-all duration-200 hover:bg-[#292f47] hover:border-[#5969a8]"
+            >
+              New Name
+            </button>
+
+            <button
+              type="submit"
+              className="py-2.5 px-6 max-sm:w-full border-none rounded-[7px] bg-[#5865f2] text-white text-[14px] font-semibold cursor-pointer transition-all duration-200 hover:bg-[#4752c4] active:translate-y-px disabled:opacity-60 disabled:cursor-not-allowed"
+              disabled={submitting}
+            >
+              {submitting
+                ? isEditMode
+                  ? "Saving..."
+                  : "Creating..."
+                : isEditMode
+                  ? "Save Changes"
+                  : "Create Company"}
+            </button>
+          </div>
         </form>
+
+        {/* Modal Popup (matching exact architecture from Company.jsx) */}
+        {showPopup && (
+          <div
+            className="fixed inset-0 bg-[#05070f]/75 flex items-center justify-center z-[1000] p-5"
+            onClick={() => {
+              setPopupError("");
+              setShowPopup(false);
+            }}
+          >
+            <div
+              className="w-full max-w-[450px] bg-[#171b2e] border border-[#30364d] rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-visible"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="flex justify-between items-center py-5 px-[22px] border-b border-[#282e45]">
+                <h2 className="m-0 text-white text-[18px] font-semibold">
+                  New Name
+                </h2>
+                <button
+                  type="button"
+                  className="w-8 h-8 border-none rounded-[6px] bg-transparent text-[#8f9bb3] text-[24px] cursor-pointer hover:bg-[#222942] hover:text-white flex items-center justify-center transition-colors leading-none"
+                  onClick={() => {
+                    setPopupError("");
+                    setShowPopup(false);
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+
+              {/* Body */}
+              <div className="p-[22px]">
+                {popupError && (
+                  <div className="p-[10px_14px] mb-4 border border-[#7f1d1d] rounded-[7px] bg-[#2a1518] text-[#fca5a5] text-[13px]">
+                    {popupError}
+                  </div>
+                )}
+
+                <label className="block text-[13px] font-medium text-[#cbd2e3] mb-2">
+                  Enter New Name <span className="text-[#ef4444]">*</span>
+                </label>
+                <input
+                  type="text"
+                  value={newName}
+                  onChange={(e) => {
+                    setNewName(e.target.value);
+                    if (popupError) {
+                      setPopupError("");
+                    }
+                  }}
+                  placeholder="Type new name here..."
+                  className={getInputClass(Boolean(popupError))}
+                  autoFocus
+                />
+              </div>
+
+              {/* Footer */}
+              <div className="flex justify-end gap-2.5 px-[22px] pb-[22px]">
+                <button
+                  type="button"
+                  className="py-[9px] px-4 rounded-[7px] border-none cursor-pointer text-[13px] bg-[#282e45] text-[#dfe3ee] hover:bg-[#343b55] transition-colors"
+                  onClick={() => {
+                    setPopupError("");
+                    setShowPopup(false);
+                  }}
+                >
+                  Close
+                </button>
+
+                <button
+                  type="button"
+                  className="py-[9px] px-4 rounded-[7px] border-none cursor-pointer text-[13px] bg-[#5865f2] text-white hover:bg-[#4752c4] transition-colors font-medium"
+                  onClick={handlePopupSubmit}
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

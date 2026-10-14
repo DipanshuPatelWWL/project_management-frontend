@@ -22,6 +22,23 @@ import CreateProject from "../pages/Project/CreateProject";
 
 import Sprint from "../pages/Sprint/Sprint";
 import CreateSprint from "../pages/Sprint/CreateSprint";
+import Task from "../pages/Task/Task";
+import CreateTask from "../pages/Task/CreateTask";
+import Bug from "../pages/Bug/Bug";
+import CreateBug from "../pages/Bug/CreateBug";
+import Meeting from "../pages/Meeting/Meeting";
+import CreateMeeting from "../pages/Meeting/CreateMeeting";
+import Document from "../pages/Document/Document";
+import CreateDocument from "../pages/Document/CreateDocument";
+import TimeLog from "../pages/TimeLog/TimeLog";
+import CreateTimeLog from "../pages/TimeLog/CreateTimeLog";
+import Notifications from "../pages/notifications/Notifications";
+import Reports from "../pages/reports/Reports";
+import ProjectReports from "../pages/reports/ProjectReports";
+import TaskReports from "../pages/reports/TaskReports";
+import BugReports from "../pages/reports/BugReports";
+import EmployeeReports from "../pages/reports/EmployeeReports";
+import TimeLogReports from "../pages/reports/TimeLogReports";
 import Loader from "../components/Loader";
 
 
@@ -59,6 +76,12 @@ const AppRoutes = () => {
                     </ProtectedRoute>
                 }
             >
+
+                {/* Root redirect to Dashboard */}
+                <Route
+                    path="/"
+                    element={<Navigate to="/dashboard" replace />}
+                />
 
                 {/* Dashboard */}
                 <Route
@@ -163,40 +186,150 @@ const AppRoutes = () => {
              
                 <Route
                     path="/tasks"
-                    element={<ComingSoon label="Tasks" />}
+                    element={<Task />}
+                />
+
+                <Route
+                    path="/tasks/create"
+                    element={<CreateTask />}
+                />
+
+                <Route
+                    path="/tasks/:taskId/edit"
+                    element={<CreateTask />}
+                />
+
+                <Route
+                    path="/tasks/edit/:taskId"
+                    element={<CreateTask />}
                 />
 
 
                 <Route
                     path="/bugs"
-                    element={<ComingSoon label="Bugs" />}
+                    element={<Bug />}
+                />
+
+                <Route
+                    path="/bugs/create"
+                    element={<CreateBug />}
+                />
+
+                <Route
+                    path="/bugs/:bugId/edit"
+                    element={<CreateBug />}
+                />
+
+                <Route
+                    path="/bugs/edit/:bugId"
+                    element={<CreateBug />}
                 />
 
 
                 <Route
                     path="/timelogs"
-                    element={<ComingSoon label="Time Logs" />}
+                    element={<TimeLog />}
+                />
+
+                <Route
+                    path="/timelogs/create"
+                    element={<CreateTimeLog />}
+                />
+
+                <Route
+                    path="/timelogs/:timeLogId/edit"
+                    element={<CreateTimeLog />}
+                />
+
+                <Route
+                    path="/timelogs/edit/:timeLogId"
+                    element={<CreateTimeLog />}
                 />
 
 
                 
                 <Route
                     path="/meetings"
-                    element={<ComingSoon label="Meetings" />}
+                    element={<Meeting />}
+                />
+
+                <Route
+                    path="/meetings/create"
+                    element={<CreateMeeting />}
+                />
+
+                <Route
+                    path="/meetings/:meetingId/edit"
+                    element={<CreateMeeting />}
+                />
+
+                <Route
+                    path="/meetings/edit/:meetingId"
+                    element={<CreateMeeting />}
                 />
 
 
               
                 <Route
                     path="/documents"
-                    element={<ComingSoon label="Documents" />}
+                    element={<Document />}
+                />
+
+                <Route
+                    path="/documents/create"
+                    element={<CreateDocument />}
+                />
+
+                <Route
+                    path="/documents/upload"
+                    element={<CreateDocument />}
+                />
+
+                <Route
+                    path="/documents/:documentId/edit"
+                    element={<CreateDocument />}
+                />
+
+                <Route
+                    path="/documents/edit/:documentId"
+                    element={<CreateDocument />}
                 />
 
 
                 
                 <Route
+                    path="/notifications"
+                    element={<Notifications />}
+                />
+
+                <Route
+                    path="/notification"
+                    element={<Notifications />}
+                />
+
+                <Route
                     path="/reports"
-                    element={<ComingSoon label="Reports" />}
+                    element={<Reports />}
+                />
+                <Route
+                    path="/reports/projects"
+                    element={<ProjectReports />}
+                />
+                <Route
+                    path="/reports/tasks"
+                    element={<TaskReports />}
+                />
+                <Route
+                    path="/reports/bugs"
+                    element={<BugReports />}
+                />
+                <Route
+                    path="/reports/employees"
+                    element={<EmployeeReports />}
+                />
+                <Route
+                    path="/reports/timelogs"
+                    element={<TimeLogReports />}
                 />
 
             </Route>

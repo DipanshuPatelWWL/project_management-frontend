@@ -15,6 +15,7 @@ import {
     FiCalendar,
     FiFileText,
     FiBarChart2,
+    FiBell,
     FiLogOut
 } from "react-icons/fi";
 
@@ -120,6 +121,20 @@ const NAV_SECTIONS = [
                 label: "Meetings",
                 path: "/meetings",
                 icon: FiCalendar,
+                roles: [
+                    "SuperAdmin",
+                    "Admin",
+                    "ProjectManager",
+                    "TeamLead",
+                    "Developer",
+                    "QA",
+                    "Client"
+                ]
+            },
+            {
+                label: "Notifications",
+                path: "/notifications",
+                icon: FiBell,
                 roles: [
                     "SuperAdmin",
                     "Admin",
@@ -305,7 +320,7 @@ const Sidebar = ({ onProfileClick, collapsed, onToggle }) => {
                                 );
                             })}
                         </div>
-                    );
+                    ); 
                 })}
             </nav>
 
