@@ -152,18 +152,18 @@ const Reports = () => {
     ];
 
     return (
-        <div className="p-6 max-w-7xl mx-auto space-y-8">
+        <div className="w-full p-[30px] max-md:p-5 box-border space-y-8">
             {/* Header Banner */}
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#171d36] via-[#141829] to-[#121626] border border-[#232a42] p-8 shadow-xl">
+            <div className="relative overflow-hidden rounded-[10px] bg-[#171b2e] border border-[#282e45] p-6 shadow-sm">
                 <div className="relative z-10 flex flex-wrap items-center justify-between gap-6">
                     <div className="max-w-2xl">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1e2746] text-[#60a5fa] border border-[#2c3963] text-[12px] font-semibold mb-3">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#111422] text-[#82b4ff] border border-[#30364d] text-[12px] font-semibold mb-3">
                             <FiBarChart2 /> Enterprise Intelligence & Telemetry
                         </div>
-                        <h1 className="text-3xl font-extrabold text-white tracking-tight">
+                        <h1 className="m-0 text-[28px] font-bold text-white tracking-normal">
                             Reports & Analytics Hub
                         </h1>
-                        <p className="text-[#94a3b8] text-[14px] mt-2 leading-relaxed">
+                        <p className="m-0 mt-2 text-[#8f9bb3] text-[14px] leading-relaxed">
                             Comprehensive reporting suite for engineering leadership. Drill down into milestone
                             delivery, sprint velocity, defect health, workforce productivity, and billable hours.
                         </p>
@@ -175,7 +175,7 @@ const Reports = () => {
                             <Link
                                 key={mod.id}
                                 to={mod.path}
-                                className="px-3.5 py-2 rounded-xl bg-[#0f1322] hover:bg-[#1c223c] border border-[#232a42] hover:border-[#3b476e] text-white text-[12px] font-medium transition-all duration-200 flex items-center gap-2 shadow-sm"
+                                className="px-3.5 py-2 rounded-lg bg-[#111422] hover:bg-[#1f243d] border border-[#30364d] hover:border-[#5865f2] text-white text-[13px] font-medium transition-all duration-200 flex items-center gap-2 shadow-sm"
                             >
                                 <span className="scale-90">{mod.icon}</span>
                                 <span>{mod.title.replace(" Reports", "")}</span>
@@ -188,8 +188,8 @@ const Reports = () => {
             {/* Executive High-Level KPI Overview */}
             <div>
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                        <FiActivity className="text-[#6366f1]" /> Executive Overview (Last 30 Days)
+                    <h2 className="text-[18px] font-bold text-white flex items-center gap-2">
+                        <FiActivity className="text-[#5865f2]" /> Executive Overview (Last 30 Days)
                     </h2>
                 </div>
 
@@ -206,10 +206,10 @@ const Reports = () => {
             <div>
                 <div className="flex items-center justify-between mb-4">
                     <div>
-                        <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                        <h2 className="text-[18px] font-bold text-white flex items-center gap-2">
                             <FiTrendingUp className="text-[#10b981]" /> Dedicated Report Suites
                         </h2>
-                        <p className="text-[#94a3b8] text-[13px] mt-0.5">
+                        <p className="m-0 mt-1 text-[#8f9bb3] text-[13px]">
                             Select a dedicated module to configure filters, generate custom views, and inspect metrics.
                         </p>
                     </div>
@@ -219,11 +219,11 @@ const Reports = () => {
                     {REPORT_MODULES.map((mod) => (
                         <div
                             key={mod.id}
-                            className={`rounded-2xl bg-gradient-to-br ${mod.accent} bg-[#141829] border border-[#232a42] p-6 flex flex-col justify-between hover:border-[#3d4872] hover:shadow-lg transition-all duration-200 group`}
+                            className={`rounded-[10px] bg-[#171b2e] border border-[#282e45] p-6 flex flex-col justify-between hover:border-[#5865f2]/60 hover:bg-[#1f243d] transition-all duration-200 group`}
                         >
                             <div>
                                 <div className="flex items-center justify-between mb-4">
-                                    <div className="w-12 h-12 rounded-xl bg-[#0f1322] border border-[#232a42] flex items-center justify-center group-hover:scale-105 transition-transform">
+                                    <div className="w-11 h-11 rounded-lg bg-[#111422] border border-[#282e45] flex items-center justify-center group-hover:scale-105 transition-transform">
                                         {mod.icon}
                                     </div>
                                     <span
@@ -233,18 +233,18 @@ const Reports = () => {
                                     </span>
                                 </div>
 
-                                <h3 className="text-base font-bold text-white group-hover:text-white transition-colors">
+                                <h3 className="text-[16px] font-bold text-white group-hover:text-white transition-colors">
                                     {mod.title}
                                 </h3>
-                                <p className="text-[#94a3b8] text-[13px] mt-2 leading-relaxed">
+                                <p className="text-[#8f9bb3] text-[13px] mt-2 leading-relaxed">
                                     {mod.description}
                                 </p>
 
-                                <div className="mt-4 pt-4 border-t border-[#232a42]/60 flex flex-wrap gap-1.5">
+                                <div className="mt-4 pt-4 border-t border-[#282e45] flex flex-wrap gap-1.5">
                                     {mod.features.map((f, i) => (
                                         <span
                                             key={i}
-                                            className="text-[11px] text-[#cbd5e1] bg-[#0f1322]/80 px-2 py-0.5 rounded-md border border-[#202742]"
+                                            className="text-[11px] text-[#dfe3ee] bg-[#111422] px-2 py-0.5 rounded-md border border-[#282e45]"
                                         >
                                             • {f}
                                         </span>
@@ -254,7 +254,7 @@ const Reports = () => {
 
                             <Link
                                 to={mod.path}
-                                className="mt-6 w-full py-2.5 px-4 rounded-xl bg-[#1e253d] hover:bg-[#252e4d] text-white text-[13px] font-semibold transition-colors flex items-center justify-center gap-2 group-hover:bg-[#2c375c]"
+                                className="mt-6 w-full py-2.5 px-4 rounded-lg bg-[#5865f2] hover:bg-[#4752c4] text-white text-[13px] font-semibold transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                             >
                                 <span>Launch {mod.title.replace(" Reports", "")} Suite</span>
                                 <FiArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
@@ -265,34 +265,34 @@ const Reports = () => {
             </div>
 
             {/* Quick Preview Switcher */}
-            <div className="bg-[#141829] border border-[#232a42] rounded-2xl p-6 shadow-md">
-                <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-[#232a42]">
+            <div className="bg-[#171b2e] border border-[#282e45] rounded-[10px] p-6 shadow-sm">
+                <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-[#282e45]">
                     <div>
-                        <h3 className="text-base font-bold text-white flex items-center gap-2">
+                        <h3 className="text-[16px] font-bold text-white flex items-center gap-2">
                             <FiBarChart2 className="text-[#38bdf8]" /> Live Telemetry Preview
                         </h3>
-                        <p className="text-[#94a3b8] text-[12px] mt-0.5">
+                        <p className="m-0 mt-1 text-[#8f9bb3] text-[13px]">
                             Instant glance at current operational metrics across all workspace initiatives.
                         </p>
                     </div>
 
-                    <div className="flex items-center gap-2 p-1 rounded-xl bg-[#0e1222] border border-[#232a42]">
+                    <div className="flex items-center gap-1.5 p-1 rounded-lg bg-[#111422] border border-[#30364d]">
                         <button
                             onClick={() => setPreviewTab("tasks")}
-                            className={`px-3 py-1.5 rounded-lg text-[12px] font-semibold transition-all ${
+                            className={`px-3 py-1.5 rounded-md text-[12px] font-semibold transition-all cursor-pointer ${
                                 previewTab === "tasks"
-                                    ? "bg-[#6366f1] text-white shadow-sm"
-                                    : "text-[#94a3b8] hover:text-white"
+                                    ? "bg-[#5865f2] text-white shadow-sm"
+                                    : "text-[#8f9bb3] hover:text-white"
                             }`}
                         >
                             Task Velocity
                         </button>
                         <button
                             onClick={() => setPreviewTab("bugs")}
-                            className={`px-3 py-1.5 rounded-lg text-[12px] font-semibold transition-all ${
+                            className={`px-3 py-1.5 rounded-md text-[12px] font-semibold transition-all cursor-pointer ${
                                 previewTab === "bugs"
-                                    ? "bg-[#6366f1] text-white shadow-sm"
-                                    : "text-[#94a3b8] hover:text-white"
+                                    ? "bg-[#5865f2] text-white shadow-sm"
+                                    : "text-[#8f9bb3] hover:text-white"
                             }`}
                         >
                             Defects & Quality

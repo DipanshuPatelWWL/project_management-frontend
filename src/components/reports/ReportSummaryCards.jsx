@@ -2,46 +2,28 @@ import React from "react";
 
 const COLOR_MAP = {
     blue: {
-        bg: "bg-[#101b38]",
-        border: "border-[#1e3a8a]/40",
         text: "text-[#60a5fa]",
-        iconBg: "bg-[#1e3a8a]/30",
-        glow: "shadow-[0_0_20px_rgba(37,99,235,0.15)]",
+        iconBg: "bg-[#1e3a8a]/20 border border-[#1e3a8a]/40",
     },
     green: {
-        bg: "bg-[#0b241b]",
-        border: "border-[#065f46]/40",
         text: "text-[#34d399]",
-        iconBg: "bg-[#065f46]/30",
-        glow: "shadow-[0_0_20px_rgba(5,150,105,0.15)]",
+        iconBg: "bg-[#065f46]/20 border border-[#065f46]/40",
     },
     purple: {
-        bg: "bg-[#1f1538]",
-        border: "border-[#581c87]/40",
         text: "text-[#c084fc]",
-        iconBg: "bg-[#581c87]/30",
-        glow: "shadow-[0_0_20px_rgba(147,51,234,0.15)]",
+        iconBg: "bg-[#581c87]/20 border border-[#581c87]/40",
     },
     red: {
-        bg: "bg-[#2b1119]",
-        border: "border-[#881337]/40",
         text: "text-[#f87171]",
-        iconBg: "bg-[#881337]/30",
-        glow: "shadow-[0_0_20px_rgba(225,29,72,0.15)]",
+        iconBg: "bg-[#881337]/20 border border-[#881337]/40",
     },
     amber: {
-        bg: "bg-[#271d0e]",
-        border: "border-[#78350f]/40",
         text: "text-[#fbbf24]",
-        iconBg: "bg-[#78350f]/30",
-        glow: "shadow-[0_0_20px_rgba(217,119,6,0.15)]",
+        iconBg: "bg-[#78350f]/20 border border-[#78350f]/40",
     },
     cyan: {
-        bg: "bg-[#0b232e]",
-        border: "border-[#155e75]/40",
         text: "text-[#38bdf8]",
-        iconBg: "bg-[#155e75]/30",
-        glow: "shadow-[0_0_20px_rgba(8,145,178,0.15)]",
+        iconBg: "bg-[#155e75]/20 border border-[#155e75]/40",
     },
 };
 
@@ -56,21 +38,21 @@ const ReportSummaryCards = ({ cards = [] }) => {
                 return (
                     <div
                         key={card.id || card.title || idx}
-                        className={`relative p-5 rounded-2xl border transition-all duration-200 hover:-translate-y-0.5 ${colorConfig.bg} ${colorConfig.border} ${colorConfig.glow}`}
+                        className="relative p-5 rounded-[10px] bg-[#171b2e] border border-[#282e45] hover:border-[#384160] transition-colors shadow-sm"
                     >
                         <div className="flex items-start justify-between gap-3">
                             <div>
-                                <span className="text-[12px] font-semibold text-[#94a3b8] uppercase tracking-wider">
+                                <span className="text-[12px] font-semibold text-[#8f9bb3] uppercase tracking-wider">
                                     {card.title}
                                 </span>
-                                <div className="text-[28px] font-bold text-white mt-1 leading-tight tracking-tight">
+                                <div className="text-[26px] font-bold text-white mt-1 leading-tight tracking-tight">
                                     {card.value ?? 0}
                                 </div>
                             </div>
 
                             {card.icon && (
                                 <div
-                                    className={`w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0 ${colorConfig.iconBg} ${colorConfig.text}`}
+                                    className={`w-11 h-11 rounded-lg flex items-center justify-center text-xl shrink-0 ${colorConfig.iconBg} ${colorConfig.text}`}
                                 >
                                     {card.icon}
                                 </div>
@@ -80,14 +62,14 @@ const ReportSummaryCards = ({ cards = [] }) => {
                         {card.progress !== undefined && (
                             <div className="mt-3">
                                 <div className="flex items-center justify-between text-[11px] mb-1">
-                                    <span className="text-[#94a3b8]">Completion Rate</span>
+                                    <span className="text-[#8f9bb3]">Completion Rate</span>
                                     <span className={`font-bold ${colorConfig.text}`}>
                                         {card.progress}%
                                     </span>
                                 </div>
-                                <div className="w-full h-1.5 rounded-full bg-[#1e293b] overflow-hidden">
+                                <div className="w-full h-1.5 rounded-full bg-[#111422] overflow-hidden">
                                     <div
-                                        className={`h-full rounded-full transition-all duration-500 bg-gradient-to-r from-blue-500 to-indigo-500`}
+                                        className="h-full rounded-full transition-all duration-500 bg-[#5865f2]"
                                         style={{ width: `${Math.min(100, Math.max(0, card.progress))}%` }}
                                     />
                                 </div>
@@ -95,7 +77,7 @@ const ReportSummaryCards = ({ cards = [] }) => {
                         )}
 
                         {card.subtext && (
-                            <div className="mt-3 pt-2.5 border-t border-[#334155]/30 text-[12px] text-[#94a3b8] flex items-center justify-between">
+                            <div className="mt-3 pt-2.5 border-t border-[#282e45] text-[12px] text-[#8f9bb3] flex items-center justify-between">
                                 <span>{card.subtext}</span>
                                 {card.badge && (
                                     <span

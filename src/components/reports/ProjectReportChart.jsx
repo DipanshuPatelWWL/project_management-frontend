@@ -4,7 +4,7 @@ import { FiCheckCircle, FiClock, FiAlertTriangle, FiLayers, FiActivity } from "r
 const ProjectReportChart = ({ report = null }) => {
     if (!report) {
         return (
-            <div className="bg-[#141829] border border-[#232a42] rounded-2xl p-8 text-center text-[#7f8aa5]">
+            <div className="bg-[#171b2e] border border-[#282e45] rounded-[10px] p-8 text-center text-[#8f9bb3]">
                 No project report data available. Select a project to view analytics.
             </div>
         );
@@ -36,11 +36,9 @@ const ProjectReportChart = ({ report = null }) => {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
             {/* Main Progress Ring & Health Card */}
-            <div className="bg-[#141829] border border-[#232a42] rounded-2xl p-6 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-lg">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none" />
-
-                <span className="text-[13px] font-semibold uppercase tracking-wider text-[#94a3b8] mb-4 flex items-center gap-2">
-                    <FiActivity className="text-[#6366f1]" /> Project Completion
+            <div className="bg-[#171b2e] border border-[#282e45] rounded-[10px] p-6 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-sm">
+                <span className="text-[13px] font-semibold uppercase tracking-wider text-[#8f9bb3] mb-4 flex items-center gap-2">
+                    <FiActivity className="text-[#5865f2]" /> Project Completion
                 </span>
 
                 <div className="relative w-40 h-40 flex items-center justify-center my-2">
@@ -50,7 +48,7 @@ const ProjectReportChart = ({ report = null }) => {
                             cx="80"
                             cy="80"
                             r={radius}
-                            stroke="#1e293b"
+                            stroke="#111422"
                             strokeWidth="12"
                             fill="transparent"
                         />
@@ -69,8 +67,8 @@ const ProjectReportChart = ({ report = null }) => {
                         />
                         <defs>
                             <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stopColor="#3b82f6" />
-                                <stop offset="100%" stopColor="#8b5cf6" />
+                                <stop offset="0%" stopColor="#5865f2" />
+                                <stop offset="100%" stopColor="#818cf8" />
                             </linearGradient>
                         </defs>
                     </svg>
@@ -79,42 +77,42 @@ const ProjectReportChart = ({ report = null }) => {
                         <span className="text-3xl font-extrabold text-white tracking-tight">
                             {projectProgress}%
                         </span>
-                        <span className="text-[11px] text-[#94a3b8] uppercase font-medium mt-0.5">
+                        <span className="text-[11px] text-[#8f9bb3] uppercase font-medium mt-0.5">
                             Progress
                         </span>
                     </div>
                 </div>
 
-                <div className="mt-4 flex items-center gap-2 px-3 py-1 rounded-full bg-[#1b223c] border border-[#2b355d] text-[#a5b4fc] text-[12px] font-medium">
+                <div className="mt-4 flex items-center gap-2 px-3 py-1 rounded-full bg-[#111422] border border-[#282e45] text-[#dfe3ee] text-[12px] font-medium">
                     <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />
                     Status: <strong className="capitalize">{project.status || "In Progress"}</strong>
                 </div>
             </div>
 
             {/* Task & Sprint Metrics Breakdown */}
-            <div className="bg-[#141829] border border-[#232a42] rounded-2xl p-6 flex flex-col justify-between">
+            <div className="bg-[#171b2e] border border-[#282e45] rounded-[10px] p-6 flex flex-col justify-between shadow-sm">
                 <div>
-                    <h3 className="text-[15px] font-bold text-white mb-4 flex items-center gap-2">
+                    <h3 className="text-[15px] font-bold text-white mb-4 flex items-center gap-2 m-0">
                         <FiLayers className="text-[#3b82f6]" /> Execution Breakdown
                     </h3>
 
                     {/* Tasks Progress Bar */}
-                    <div className="mb-5">
+                    <div className="mb-5 mt-4">
                         <div className="flex items-center justify-between text-[13px] mb-1.5">
-                            <span className="text-[#cbd5e1] font-medium flex items-center gap-1.5">
+                            <span className="text-[#dfe3ee] font-medium flex items-center gap-1.5">
                                 <FiCheckCircle className="text-[#3b82f6]" size={14} /> Tasks Completed
                             </span>
                             <span className="text-white font-bold">
                                 {completedTasks} / {totalTasks} ({taskCompletionPct}%)
                             </span>
                         </div>
-                        <div className="w-full h-2 rounded-full bg-[#1e293b] overflow-hidden">
+                        <div className="w-full h-2 rounded-full bg-[#111422] overflow-hidden">
                             <div
                                 className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full transition-all duration-500"
                                 style={{ width: `${taskCompletionPct}%` }}
                             />
                         </div>
-                        <div className="flex justify-between text-[11px] text-[#64748b] mt-1">
+                        <div className="flex justify-between text-[11px] text-[#8f9bb3] mt-1">
                             <span>Pending: {pendingTasks}</span>
                             <span>Completed: {completedTasks}</span>
                         </div>
@@ -123,27 +121,27 @@ const ProjectReportChart = ({ report = null }) => {
                     {/* Sprints Progress Bar */}
                     <div>
                         <div className="flex items-center justify-between text-[13px] mb-1.5">
-                            <span className="text-[#cbd5e1] font-medium flex items-center gap-1.5">
+                            <span className="text-[#dfe3ee] font-medium flex items-center gap-1.5">
                                 <FiLayers className="text-[#8b5cf6]" size={14} /> Sprints Completed
                             </span>
                             <span className="text-white font-bold">
                                 {completedSprints} / {totalSprints} ({sprintCompletionPct}%)
                             </span>
                         </div>
-                        <div className="w-full h-2 rounded-full bg-[#1e293b] overflow-hidden">
+                        <div className="w-full h-2 rounded-full bg-[#111422] overflow-hidden">
                             <div
                                 className="h-full bg-gradient-to-r from-purple-500 to-indigo-400 rounded-full transition-all duration-500"
                                 style={{ width: `${sprintCompletionPct}%` }}
                             />
                         </div>
-                        <div className="flex justify-between text-[11px] text-[#64748b] mt-1">
+                        <div className="flex justify-between text-[11px] text-[#8f9bb3] mt-1">
                             <span>Total Sprints: {totalSprints}</span>
                             <span>Finished: {completedSprints}</span>
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-[#232a42] flex items-center justify-between text-[12px] text-[#94a3b8]">
+                <div className="mt-5 pt-4 border-t border-[#282e45] flex items-center justify-between text-[12px] text-[#8f9bb3]">
                     <span>Total Logged Effort</span>
                     <span className="text-[#38bdf8] font-bold text-[14px]">
                         {totalLoggedHours} Hours
@@ -152,21 +150,21 @@ const ProjectReportChart = ({ report = null }) => {
             </div>
 
             {/* Quality & Bug Health Card */}
-            <div className="bg-[#141829] border border-[#232a42] rounded-2xl p-6 flex flex-col justify-between">
+            <div className="bg-[#171b2e] border border-[#282e45] rounded-[10px] p-6 flex flex-col justify-between shadow-sm">
                 <div>
-                    <h3 className="text-[15px] font-bold text-white mb-4 flex items-center gap-2">
+                    <h3 className="text-[15px] font-bold text-white mb-4 flex items-center gap-2 m-0">
                         <FiAlertTriangle className="text-[#ef4444]" /> Quality & Bug Health
                     </h3>
 
-                    <div className="grid grid-cols-2 gap-3 mb-4">
-                        <div className="bg-[#1c1829] border border-[#3b1d28] rounded-xl p-3.5 text-center">
+                    <div className="grid grid-cols-2 gap-3 mb-4 mt-4">
+                        <div className="bg-[#111422] border border-[#282e45] rounded-lg p-3.5 text-center">
                             <span className="text-[11px] uppercase tracking-wider font-semibold text-[#f87171]">
                                 Open Bugs
                             </span>
                             <div className="text-2xl font-bold text-white mt-1">{openBugs}</div>
                         </div>
 
-                        <div className="bg-[#102422] border border-[#065f46]/40 rounded-xl p-3.5 text-center">
+                        <div className="bg-[#111422] border border-[#282e45] rounded-lg p-3.5 text-center">
                             <span className="text-[11px] uppercase tracking-wider font-semibold text-[#34d399]">
                                 Resolved Bugs
                             </span>
@@ -177,10 +175,10 @@ const ProjectReportChart = ({ report = null }) => {
                     {/* Bug Resolution Progress Bar */}
                     <div>
                         <div className="flex items-center justify-between text-[13px] mb-1.5">
-                            <span className="text-[#cbd5e1] font-medium">Resolution Rate</span>
+                            <span className="text-[#dfe3ee] font-medium">Resolution Rate</span>
                             <span className="text-[#34d399] font-bold">{bugResolutionPct}%</span>
                         </div>
-                        <div className="w-full h-2 rounded-full bg-[#1e293b] overflow-hidden">
+                        <div className="w-full h-2 rounded-full bg-[#111422] overflow-hidden">
                             <div
                                 className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-500"
                                 style={{ width: `${bugResolutionPct}%` }}
@@ -189,7 +187,7 @@ const ProjectReportChart = ({ report = null }) => {
                     </div>
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-[#232a42] flex items-center justify-between text-[12px] text-[#94a3b8]">
+                <div className="mt-5 pt-4 border-t border-[#282e45] flex items-center justify-between text-[12px] text-[#8f9bb3]">
                     <span>Total Bugs Logged</span>
                     <span className="text-white font-bold text-[14px]">{totalBugs}</span>
                 </div>

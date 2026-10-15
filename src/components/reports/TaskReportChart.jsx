@@ -11,7 +11,7 @@ const PRIORITY_CONFIG = {
 const TaskReportChart = ({ report = null }) => {
     if (!report) {
         return (
-            <div className="bg-[#141829] border border-[#232a42] rounded-2xl p-8 text-center text-[#7f8aa5]">
+            <div className="bg-[#171b2e] border border-[#282e45] rounded-[10px] p-8 text-center text-[#8f9bb3]">
                 No task report data available.
             </div>
         );
@@ -36,19 +36,19 @@ const TaskReportChart = ({ report = null }) => {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             {/* Status Distribution Chart */}
-            <div className="bg-[#141829] border border-[#232a42] rounded-2xl p-6 flex flex-col justify-between shadow-md">
+            <div className="bg-[#171b2e] border border-[#282e45] rounded-[10px] p-6 flex flex-col justify-between shadow-sm">
                 <div>
                     <div className="flex items-center justify-between mb-4">
-                        <h3 className="text-[15px] font-bold text-white flex items-center gap-2">
+                        <h3 className="text-[15px] font-bold text-white flex items-center gap-2 m-0">
                             <FiTrendingUp className="text-[#3b82f6]" /> Status Breakdown
                         </h3>
-                        <span className="text-[12px] font-semibold text-[#38bdf8] bg-[#0c2838] border border-[#0e4868] px-2.5 py-0.5 rounded-full">
+                        <span className="text-[12px] font-semibold text-[#38bdf8] bg-[#111422] border border-[#282e45] px-2.5 py-0.5 rounded-full">
                             {completionRate}% Completed
                         </span>
                     </div>
 
                     {/* Segmented Horizontal Progress Bar */}
-                    <div className="w-full h-3 rounded-full bg-[#1e293b] flex overflow-hidden mb-5">
+                    <div className="w-full h-3 rounded-full bg-[#111422] flex overflow-hidden mb-5">
                         <div
                             style={{ width: `${completedPct}%` }}
                             className="bg-[#10b981] transition-all duration-500"
@@ -68,41 +68,41 @@ const TaskReportChart = ({ report = null }) => {
 
                     {/* Status Pill Cards */}
                     <div className="grid grid-cols-3 gap-3">
-                        <div className="bg-[#0b241b] border border-[#065f46]/40 rounded-xl p-3 text-center">
+                        <div className="bg-[#111422] border border-[#282e45] rounded-lg p-3 text-center">
                             <div className="flex items-center justify-center gap-1.5 text-[11px] font-semibold text-[#34d399] uppercase">
                                 <FiCheckCircle size={13} /> Done
                             </div>
                             <div className="text-2xl font-extrabold text-white mt-1">{completedTasks}</div>
-                            <div className="text-[11px] text-[#64748b]">{completedPct}%</div>
+                            <div className="text-[11px] text-[#8f9bb3]">{completedPct}%</div>
                         </div>
 
-                        <div className="bg-[#101b38] border border-[#1e3a8a]/40 rounded-xl p-3 text-center">
+                        <div className="bg-[#111422] border border-[#282e45] rounded-lg p-3 text-center">
                             <div className="flex items-center justify-center gap-1.5 text-[11px] font-semibold text-[#60a5fa] uppercase">
                                 <FiPlayCircle size={13} /> Active
                             </div>
                             <div className="text-2xl font-extrabold text-white mt-1">{inProgressTasks}</div>
-                            <div className="text-[11px] text-[#64748b]">{inProgressPct}%</div>
+                            <div className="text-[11px] text-[#8f9bb3]">{inProgressPct}%</div>
                         </div>
 
-                        <div className="bg-[#271d0e] border border-[#78350f]/40 rounded-xl p-3 text-center">
+                        <div className="bg-[#111422] border border-[#282e45] rounded-lg p-3 text-center">
                             <div className="flex items-center justify-center gap-1.5 text-[11px] font-semibold text-[#fbbf24] uppercase">
                                 <FiClock size={13} /> Pending
                             </div>
                             <div className="text-2xl font-extrabold text-white mt-1">{pendingTasks}</div>
-                            <div className="text-[11px] text-[#64748b]">{pendingPct}%</div>
+                            <div className="text-[11px] text-[#8f9bb3]">{pendingPct}%</div>
                         </div>
                     </div>
                 </div>
 
                 {/* Story Points Meter */}
-                <div className="mt-5 pt-4 border-t border-[#232a42]">
-                    <div className="flex justify-between text-[12px] text-[#cbd5e1] mb-1.5 font-medium">
+                <div className="mt-5 pt-4 border-t border-[#282e45]">
+                    <div className="flex justify-between text-[12px] text-[#dfe3ee] mb-1.5 font-medium">
                         <span>Story Points Burndown</span>
                         <span className="font-bold text-white">
                             {completedStoryPoints} / {totalStoryPoints} pts ({storyPointsPct}%)
                         </span>
                     </div>
-                    <div className="w-full h-2 rounded-full bg-[#1e293b] overflow-hidden">
+                    <div className="w-full h-2 rounded-full bg-[#111422] overflow-hidden">
                         <div
                             className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transition-all duration-500"
                             style={{ width: `${storyPointsPct}%` }}
@@ -112,13 +112,13 @@ const TaskReportChart = ({ report = null }) => {
             </div>
 
             {/* Priority Distribution Chart */}
-            <div className="bg-[#141829] border border-[#232a42] rounded-2xl p-6 flex flex-col justify-between shadow-md">
+            <div className="bg-[#171b2e] border border-[#282e45] rounded-[10px] p-6 flex flex-col justify-between shadow-sm">
                 <div>
-                    <h3 className="text-[15px] font-bold text-white mb-4 flex items-center gap-2">
+                    <h3 className="text-[15px] font-bold text-white mb-4 flex items-center gap-2 m-0">
                         <FiFlag className="text-[#f59e0b]" /> Priority Distribution
                     </h3>
 
-                    <div className="space-y-3.5">
+                    <div className="space-y-3.5 mt-4">
                         {["critical", "high", "medium", "low"].map((key) => {
                             const config = PRIORITY_CONFIG[key];
                             const count = priorityReport[key] || 0;
@@ -131,11 +131,11 @@ const TaskReportChart = ({ report = null }) => {
                                             <span className={`w-2.5 h-2.5 rounded-full ${config.color}`} />
                                             {config.label}
                                         </span>
-                                        <span className="text-[#e2e8f0] font-bold">
-                                            {count} <span className="text-[#64748b] font-normal">({pct}%)</span>
+                                        <span className="text-[#dfe3ee] font-bold">
+                                            {count} <span className="text-[#8f9bb3] font-normal">({pct}%)</span>
                                         </span>
                                     </div>
-                                    <div className="w-full h-2 rounded-full bg-[#1e293b] overflow-hidden">
+                                    <div className="w-full h-2 rounded-full bg-[#111422] overflow-hidden">
                                         <div
                                             className={`h-full rounded-full transition-all duration-500 ${config.color}`}
                                             style={{ width: `${pct}%` }}
@@ -147,7 +147,7 @@ const TaskReportChart = ({ report = null }) => {
                     </div>
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-[#232a42] flex justify-between items-center text-[12px] text-[#94a3b8]">
+                <div className="mt-5 pt-4 border-t border-[#282e45] flex justify-between items-center text-[12px] text-[#8f9bb3]">
                     <span>Total Tasks Analyzed</span>
                     <span className="text-white font-bold text-[14px]">{totalTasks}</span>
                 </div>

@@ -100,25 +100,21 @@ const ProjectReports = () => {
     const activeProject = projects.find((p) => p._id === selectedProjectId);
 
     return (
-        <div className="p-6 max-w-7xl mx-auto">
+        <div className="w-full p-[30px] max-md:p-5 box-border">
             {/* Header with Navigation */}
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-                <div>
-                    <div className="flex items-center gap-2 mb-1">
-                        <Link
-                            to="/reports"
-                            className="text-[#94a3b8] hover:text-white transition-colors flex items-center gap-1 text-[13px]"
-                        >
-                            <FiArrowLeft size={14} /> Back to All Reports
-                        </Link>
-                    </div>
-                    <h1 className="text-2xl font-bold text-white flex items-center gap-2.5">
-                        <FiFolder className="text-[#3b82f6]" /> Project Performance Reports
-                    </h1>
-                    <p className="text-[#94a3b8] text-[13px] mt-1">
-                        Deep dive execution analytics, milestone completion, and defect health for projects.
-                    </p>
-                </div>
+            <div className="mb-6">
+                <Link
+                    to="/reports"
+                    className="text-[#8f9bb3] hover:text-white transition-colors flex items-center gap-1.5 text-[13px] mb-2 font-medium w-fit"
+                >
+                    <FiArrowLeft size={14} /> Back to All Reports
+                </Link>
+                <h1 className="m-0 text-[28px] font-bold text-white tracking-normal flex items-center gap-2.5">
+                    <FiFolder className="text-[#5865f2]" /> Project Performance Reports
+                </h1>
+                <p className="m-0 mt-1.5 text-[#8f9bb3] text-[14px]">
+                    Deep dive execution analytics, milestone completion, and defect health for projects.
+                </p>
             </div>
 
             {/* Project Filter */}
@@ -132,7 +128,7 @@ const ProjectReports = () => {
             />
 
             {error && (
-                <div className="p-4 mb-6 rounded-xl bg-red-950/40 border border-red-800/40 text-red-300 text-[13px]">
+                <div className="p-4 mb-6 rounded-lg bg-red-950/40 border border-red-800/40 text-red-300 text-[13px]">
                     {error}
                 </div>
             )}
@@ -145,18 +141,18 @@ const ProjectReports = () => {
                 <>
                     {/* Active Project Info Banner */}
                     {activeProject && (
-                        <div className="bg-[#121629] border border-[#232942] rounded-xl p-4 mb-6 flex flex-wrap items-center justify-between gap-3">
+                        <div className="bg-[#171b2e] border border-[#282e45] rounded-[10px] p-4 mb-6 flex flex-wrap items-center justify-between gap-3 shadow-sm">
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-lg bg-[#1e2746] text-[#60a5fa] flex items-center justify-center font-bold text-lg">
+                                <div className="w-10 h-10 rounded-lg bg-[#111422] border border-[#282e45] text-[#5865f2] flex items-center justify-center font-bold text-lg">
                                     📁
                                 </div>
                                 <div>
-                                    <h2 className="text-base font-bold text-white leading-tight">
+                                    <h2 className="text-[16px] font-bold text-white leading-tight m-0">
                                         {activeProject.projectName}
                                     </h2>
-                                    <div className="text-[12px] text-[#7f8aa5] mt-0.5">
+                                    <div className="text-[12px] text-[#8f9bb3] mt-1">
                                         {activeProject.projectId ? `ID: ${activeProject.projectId} • ` : ""}
-                                        Status: <span className="text-[#cbd5e1] font-medium capitalize">{activeProject.status || "Active"}</span>
+                                        Status: <span className="text-[#dfe3ee] font-medium capitalize">{activeProject.status || "Active"}</span>
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +166,7 @@ const ProjectReports = () => {
                     <ProjectReportChart report={report} />
                 </>
             ) : (
-                <div className="bg-[#141829] border border-[#232a42] rounded-2xl p-12 text-center text-[#7f8aa5]">
+                <div className="bg-[#171b2e] border border-[#282e45] rounded-[10px] p-10 text-center text-[#8f9bb3]">
                     Select a project from the filter above to generate the performance report.
                 </div>
             )}

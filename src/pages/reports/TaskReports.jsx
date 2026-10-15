@@ -154,25 +154,21 @@ const TaskReports = () => {
         : [];
 
     return (
-        <div className="p-6 max-w-7xl mx-auto">
+        <div className="w-full p-[30px] max-md:p-5 box-border">
             {/* Header */}
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-                <div>
-                    <div className="flex items-center gap-2 mb-1">
-                        <Link
-                            to="/reports"
-                            className="text-[#94a3b8] hover:text-white transition-colors flex items-center gap-1 text-[13px]"
-                        >
-                            <FiArrowLeft size={14} /> Back to All Reports
-                        </Link>
-                    </div>
-                    <h1 className="text-2xl font-bold text-white flex items-center gap-2.5">
-                        <FiCheckSquare className="text-[#3b82f6]" /> Task Execution & Velocity Reports
-                    </h1>
-                    <p className="text-[#94a3b8] text-[13px] mt-1">
-                        Analyze sprint workload distributions, completion rates, and priority allocations.
-                    </p>
-                </div>
+            <div className="mb-6">
+                <Link
+                    to="/reports"
+                    className="text-[#8f9bb3] hover:text-white transition-colors flex items-center gap-1.5 text-[13px] mb-2 font-medium w-fit"
+                >
+                    <FiArrowLeft size={14} /> Back to All Reports
+                </Link>
+                <h1 className="m-0 text-[28px] font-bold text-white tracking-normal flex items-center gap-2.5">
+                    <FiCheckSquare className="text-[#5865f2]" /> Task Execution & Velocity Reports
+                </h1>
+                <p className="m-0 mt-1.5 text-[#8f9bb3] text-[14px]">
+                    Analyze sprint workload distributions, completion rates, and priority allocations.
+                </p>
             </div>
 
             {/* Filter Toolbar */}
@@ -197,7 +193,7 @@ const TaskReports = () => {
             />
 
             {error && (
-                <div className="p-4 mb-6 rounded-xl bg-red-950/40 border border-red-800/40 text-red-300 text-[13px]">
+                <div className="p-4 mb-6 rounded-lg bg-red-950/40 border border-red-800/40 text-red-300 text-[13px]">
                     {error}
                 </div>
             )}
@@ -215,7 +211,7 @@ const TaskReports = () => {
                     <TaskReportChart report={report} />
                 </>
             ) : (
-                <div className="bg-[#141829] border border-[#232a42] rounded-2xl p-12 text-center text-[#7f8aa5]">
+                <div className="bg-[#171b2e] border border-[#282e45] rounded-[10px] p-10 text-center text-[#8f9bb3]">
                     No task metrics found for the selected filter combination.
                 </div>
             )}

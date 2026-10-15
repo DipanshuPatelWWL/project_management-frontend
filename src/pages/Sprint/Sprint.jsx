@@ -367,9 +367,7 @@ const Sprint = () => {
                                         return (
                                             <tr key={sprint._id} className="hover:bg-[#1c2136] transition-colors last:[&>td]:border-b-0">
                                                 <td className="border-none p-[15px] text-left text-[13px] text-[#e8ebf5] border-b border-[#282e45] whitespace-nowrap">
-                                                    <span className="inline-block py-1 px-[9px] bg-[#202742] border border-[#313d66] rounded-[6px] text-[#9fc5ff] text-[12px] font-semibold tracking-[0.03em]">
-                                                        {sprint.sprintId || "-"}
-                                                    </span>
+                                                    {sprint.sprintId || "-"}
                                                 </td>
 
                                                 <td className="border-none p-[15px] text-left text-[13px] text-[#e8ebf5] border-b border-[#282e45] whitespace-nowrap capitalize">
@@ -516,7 +514,7 @@ const Sprint = () => {
                         <div className="p-[1px] grid grid-cols-2 max-[900px]:grid-cols-1 gap-[1px] bg-[#282e45]">
                             <div className="flex flex-col gap-1.5 p-4 bg-[#171b2e]">
                                 <strong className="text-[#7f8aa5] text-[12px]">Sprint ID</strong>
-                                <span className="inline-block py-1 px-[9px] bg-[#202742] border border-[#313d66] rounded-[6px] text-[#9fc5ff] text-[12px] font-semibold tracking-[0.03em] w-fit">{viewSprint.sprintId || "-"}</span>
+                                <span className="text-[#eef1f8] text-[14px] font-medium break-words">{viewSprint.sprintId || "-"}</span>
                             </div>
 
                             <div className="flex flex-col gap-1.5 p-4 bg-[#171b2e]">

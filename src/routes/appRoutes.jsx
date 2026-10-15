@@ -39,6 +39,8 @@ import TaskReports from "../pages/reports/TaskReports";
 import BugReports from "../pages/reports/BugReports";
 import EmployeeReports from "../pages/reports/EmployeeReports";
 import TimeLogReports from "../pages/reports/TimeLogReports";
+import AuditLogs from "../pages/auditLogs/AuditLogs";
+import SearchResults from "../pages/search/SearchResults";
 import Loader from "../components/Loader";
 
 
@@ -330,6 +332,22 @@ const AppRoutes = () => {
                 <Route
                     path="/reports/timelogs"
                     element={<TimeLogReports />}
+                />
+                <Route
+                    path="/audit-logs"
+                    element={<AuditLogs />}
+                />
+                <Route
+                    path="/auditlogs"
+                    element={<AuditLogs />}
+                />
+                <Route
+                    path="/audit-log"
+                    element={<AuditLogs />}
+                />
+                <Route
+                    path="/search"
+                    element={<SearchResults />}
                 />
 
             </Route>

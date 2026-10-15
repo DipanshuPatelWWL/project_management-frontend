@@ -69,30 +69,30 @@ const NotificationItem = ({ notification, onMarkAsRead, onDelete }) => {
 
     return (
         <div
-            className={`group relative p-4 rounded-xl border transition-all duration-200 flex items-start gap-3.5 ${
+            className={`group relative p-4 rounded-[10px] border transition-all duration-200 flex items-start gap-3.5 ${
                 isRead
-                    ? "bg-[#0b0c10] border-[#1f2333] hover:border-[#2f354d]"
-                    : "bg-[#000000] border-[#384160] shadow-[0_4px_20px_rgba(0,0,0,0.7)] hover:border-[#5865f2]"
+                    ? "bg-[#171b2e] border-[#282e45] hover:border-[#384160] hover:bg-[#1f243d]"
+                    : "bg-[#1a2035] border-[#5865f2]/40 shadow-sm hover:border-[#5865f2]"
             }`}
         >
             {/* Unread Glowing Dot */}
             {!isRead && (
                 <span
-                    className="absolute top-4 right-4 w-2.5 h-2.5 rounded-full bg-[#5865f2] shadow-[0_0_10px_rgba(88,101,242,1)]"
+                    className="absolute top-4 right-4 w-2.5 h-2.5 rounded-full bg-[#5865f2] shadow-[0_0_8px_rgba(88,101,242,0.8)]"
                     title="Unread"
                 />
             )}
 
             {/* Type Icon Badge */}
             <div
-                className={`w-10 h-10 rounded-xl flex items-center justify-center text-[18px] shrink-0 border ${config.badgeBg} ${config.border}`}
+                className={`w-10 h-10 rounded-lg flex items-center justify-center text-[18px] shrink-0 border ${config.badgeBg} ${config.border}`}
             >
                 {config.icon}
             </div>
 
             {/* Content Details */}
             <div className="flex-1 min-w-0 pr-6">
-                <div className="flex flex-wrap items-center gap-2 mb-1">
+                <div className="flex flex-wrap items-center gap-2 mb-1.5">
                     <span
                         className={`text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md ${config.badgeBg} ${config.badgeText}`}
                     >
@@ -100,32 +100,32 @@ const NotificationItem = ({ notification, onMarkAsRead, onDelete }) => {
                     </span>
 
                     {project && (
-                        <span className="text-[11px] font-medium text-[#8ea1c8] bg-[#121626] px-2 py-0.5 rounded-md border border-[#232942] truncate max-w-[150px]">
+                        <span className="text-[11px] font-medium text-[#8f9bb3] bg-[#111422] px-2 py-0.5 rounded-md border border-[#282e45] truncate max-w-[150px]">
                             {project.projectName || project.projectId || "Project"}
                         </span>
                     )}
 
-                    <span className="text-[12px] text-[#6b7796] ml-auto">
+                    <span className="text-[12px] text-[#7f8aa5] ml-auto">
                         {timeAgo}
                     </span>
                 </div>
 
                 <h4
                     className={`text-[14px] font-semibold m-0 leading-snug break-words ${
-                        isRead ? "text-[#c2cbde]" : "text-[#ffffff]"
+                        isRead ? "text-[#dfe3ee]" : "text-[#ffffff]"
                     }`}
                 >
                     {title}
                 </h4>
 
                 {message && (
-                    <p className="text-[13px] text-[#8f9bb5] m-0 mt-1 leading-relaxed break-words whitespace-pre-wrap">
+                    <p className="text-[13px] text-[#8f9bb3] m-0 mt-1 leading-relaxed break-words whitespace-pre-wrap">
                         {message}
                     </p>
                 )}
 
                 {/* Footer Info & Actions */}
-                <div className="flex items-center justify-between gap-3 mt-3 pt-2.5 border-t border-[#222840]/60">
+                <div className="flex items-center justify-between gap-3 mt-3 pt-2.5 border-t border-[#282e45]">
                     <div className="flex flex-wrap items-center gap-2">
                         {sender?.profileImage ? (
                             <img
@@ -134,17 +134,17 @@ const NotificationItem = ({ notification, onMarkAsRead, onDelete }) => {
                                 className="w-5 h-5 rounded-full object-cover"
                             />
                         ) : (
-                            <div className="w-5 h-5 rounded-full bg-[#252c48] text-[#9fc5ff] text-[10px] font-bold flex items-center justify-center uppercase">
+                            <div className="w-5 h-5 rounded-full bg-[#282e45] text-[#9fc5ff] text-[10px] font-bold flex items-center justify-center uppercase">
                                 {senderInitial}
                             </div>
                         )}
-                        <span className="text-[12px] text-[#7d8aa8]">
-                            From: <span className="text-[#a6b4d3] font-medium">{senderName}</span>
+                        <span className="text-[12px] text-[#7f8aa5]">
+                            From: <span className="text-[#dfe3ee] font-medium">{senderName}</span>
                         </span>
                         {receiver && (
-                            <span className="text-[12px] text-[#7d8aa8] ml-1">
+                            <span className="text-[12px] text-[#7f8aa5] ml-1">
                                 • To:{" "}
-                                <span className="text-[#a6b4d3] font-medium">
+                                <span className="text-[#dfe3ee] font-medium">
                                     {`${receiver.firstName || ""} ${receiver.lastName || ""}`.trim() ||
                                         receiver.email ||
                                         "User"}
@@ -158,7 +158,7 @@ const NotificationItem = ({ notification, onMarkAsRead, onDelete }) => {
                             <button
                                 type="button"
                                 onClick={() => onMarkAsRead(_id)}
-                                className="text-[11px] font-medium py-1 px-2.5 rounded-md bg-[#222b48] hover:bg-[#2c3860] text-[#9fc5ff] transition-colors"
+                                className="text-[11px] font-medium py-1 px-2.5 rounded-md bg-[#282e45] hover:bg-[#343b55] text-[#82b4ff] transition-colors cursor-pointer"
                             >
                                 Mark Read
                             </button>
@@ -168,7 +168,7 @@ const NotificationItem = ({ notification, onMarkAsRead, onDelete }) => {
                             <button
                                 type="button"
                                 onClick={() => onDelete(_id)}
-                                className="text-[11px] font-medium py-1 px-2.5 rounded-md bg-[#331c23] hover:bg-[#48232e] text-[#ff9da9] transition-colors"
+                                className="text-[11px] font-medium py-1 px-2.5 rounded-md bg-[#a83d4c]/20 hover:bg-[#a83d4c]/30 text-[#ff8e9a] border border-[#a83d4c]/30 transition-colors cursor-pointer"
                             >
                                 Delete
                             </button>

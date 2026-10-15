@@ -1,12 +1,17 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const Login = () => {
-    const { login } = useAuth();
+    const { login, user } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
+
+    // Agar user pehle se logged-in hai, to login page ke bajaye dashboard par bhejo
+    if (user) {
+        return <Navigate to="/dashboard" replace />;
+    }
 
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [error, setError] = useState("");

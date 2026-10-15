@@ -230,25 +230,21 @@ const EmployeeReports = () => {
     const activeEmployee = users.find((u) => u._id === selectedUser);
 
     return (
-        <div className="p-6 max-w-7xl mx-auto">
+        <div className="w-full p-[30px] max-md:p-5 box-border">
             {/* Header */}
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-                <div>
-                    <div className="flex items-center gap-2 mb-1">
-                        <Link
-                            to="/reports"
-                            className="text-[#94a3b8] hover:text-white transition-colors flex items-center gap-1 text-[13px]"
-                        >
-                            <FiArrowLeft size={14} /> Back to All Reports
-                        </Link>
-                    </div>
-                    <h1 className="text-2xl font-bold text-white flex items-center gap-2.5">
-                        <FiUsers className="text-[#a855f7]" /> Employee Productivity & Workload Reports
-                    </h1>
-                    <p className="text-[#94a3b8] text-[13px] mt-1">
-                        Track individual engineer output, task turnaround rates, resolved defects, and logged hours.
-                    </p>
-                </div>
+            <div className="mb-6">
+                <Link
+                    to="/reports"
+                    className="text-[#8f9bb3] hover:text-white transition-colors flex items-center gap-1.5 text-[13px] mb-2 font-medium w-fit"
+                >
+                    <FiArrowLeft size={14} /> Back to All Reports
+                </Link>
+                <h1 className="m-0 text-[28px] font-bold text-white tracking-normal flex items-center gap-2.5">
+                    <FiUsers className="text-[#5865f2]" /> Employee Productivity & Workload Reports
+                </h1>
+                <p className="m-0 mt-1.5 text-[#8f9bb3] text-[14px]">
+                    Track individual engineer output, task turnaround rates, resolved defects, and logged hours.
+                </p>
             </div>
 
             {/* Filter toolbar */}
@@ -262,7 +258,7 @@ const EmployeeReports = () => {
             />
 
             {error && (
-                <div className="p-4 mb-6 rounded-xl bg-red-950/40 border border-red-800/40 text-red-300 text-[13px]">
+                <div className="p-4 mb-6 rounded-lg bg-red-950/40 border border-red-800/40 text-red-300 text-[13px]">
                     {error}
                 </div>
             )}
@@ -275,7 +271,7 @@ const EmployeeReports = () => {
                 <>
                     {/* Active Employee Selected Banner */}
                     {activeEmployee && singleReport && (
-                        <div className="bg-[#121629] border border-[#232942] rounded-xl p-4 mb-6 flex flex-wrap items-center justify-between gap-3">
+                        <div className="bg-[#171b2e] border border-[#282e45] rounded-[10px] p-4 mb-6 flex flex-wrap items-center justify-between gap-3 shadow-sm">
                             <div className="flex items-center gap-3">
                                 {!avatarError && activeEmployee.profileImage ? (
                                     <img
@@ -285,27 +281,27 @@ const EmployeeReports = () => {
                                         className="w-11 h-11 rounded-full object-cover border border-[#2d3748] shrink-0"
                                     />
                                 ) : (
-                                    <div className="w-11 h-11 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 text-white font-bold text-sm flex items-center justify-center shrink-0">
+                                    <div className="w-11 h-11 rounded-full bg-[#5865f2] text-white font-bold text-sm flex items-center justify-center shrink-0">
                                         {(activeEmployee.firstName || "U").charAt(0).toUpperCase()}
                                     </div>
                                 )}
                                 <div>
                                     <div className="flex items-center gap-2">
-                                        <h2 className="text-base font-bold text-white">
+                                        <h2 className="text-[16px] font-bold text-white m-0">
                                             {`${activeEmployee.firstName || ""} ${activeEmployee.lastName || ""}`.trim() || activeEmployee.name}
                                         </h2>
-                                        <span className="text-[11px] font-semibold bg-[#2a1d45] text-[#c084fc] px-2 py-0.5 rounded-full border border-[#4c2882]">
+                                        <span className="text-[11px] font-semibold bg-[#5865f2]/20 text-[#818cf8] px-2.5 py-0.5 rounded-full border border-[#5865f2]/30">
                                             {activeEmployee.role || "Member"}
                                         </span>
                                     </div>
-                                    <div className="text-[12px] text-[#7f8aa5] mt-0.5">
+                                    <div className="text-[12px] text-[#8f9bb3] mt-1">
                                         {activeEmployee.email} • {activeEmployee.department || "Engineering"}
                                     </div>
                                 </div>
                             </div>
                             <button
                                 onClick={() => setSelectedUser("")}
-                                className="px-3 py-1.5 rounded-lg text-[12px] bg-[#1a2138] hover:bg-[#222b49] text-[#94a3b8] hover:text-white border border-[#2b3553] transition-colors"
+                                className="px-3.5 py-1.5 rounded-lg text-[12px] bg-[#171b2e] hover:bg-[#222942] text-[#8f9bb3] hover:text-white border border-[#30364d] transition-colors cursor-pointer"
                             >
                                 Clear Selection (View All)
                             </button>

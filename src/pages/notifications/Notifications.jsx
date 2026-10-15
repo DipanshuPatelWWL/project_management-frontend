@@ -82,25 +82,20 @@ const Notifications = () => {
     }, [notifications, activeFilter, searchQuery]);
 
     return (
-        <div className="min-h-screen bg-[#0b0e19] text-[#e8ebf5] p-6 max-md:p-4">
-            <div className="max-w-6xl mx-auto flex flex-col gap-5">
+        <div className="w-full p-[30px] max-md:p-5 box-border">
+            <div className="flex flex-col gap-6">
                 {/* Header Section */}
-                <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[#202742]">
-                    <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-2xl bg-[#1b223d] border border-[#2b355e] flex items-center justify-center text-2xl shadow-inner">
-                            🔔
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                        <div className="flex items-center gap-3">
+                            <h1 className="m-0 text-[28px] font-bold text-white tracking-normal">
+                                Notifications
+                            </h1>
+                            <NotificationBadge count={unreadCount} size="md" />
                         </div>
-                        <div>
-                            <div className="flex items-center gap-2.5">
-                                <h1 className="text-[22px] font-bold text-white m-0">
-                                    Notifications
-                                </h1>
-                                <NotificationBadge count={unreadCount} size="md" />
-                            </div>
-                            <p className="text-[13px] text-[#7a87a7] m-0 mt-0.5">
-                                Real-time activity, task updates, bug reports, and meeting alerts
-                            </p>
-                        </div>
+                        <p className="m-0 mt-1.5 text-[#8f9bb3] text-[14px]">
+                            Real-time activity, task updates, bug reports, and team alerts
+                        </p>
                     </div>
 
                     <div className="flex items-center gap-2">
@@ -112,13 +107,13 @@ const Notifications = () => {
                 </div>
 
                 {/* 3 Metric Cards */}
-                <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-3.5">
-                    <div className="bg-[#171b2e] border border-[#282e45] rounded-xl p-4 flex items-center justify-between">
+                <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-4">
+                    <div className="bg-[#171b2e] border border-[#282e45] rounded-[10px] p-5 flex items-center justify-between">
                         <div>
-                            <span className="text-[12px] text-[#7a87a7] font-medium block">
+                            <span className="text-[12px] text-[#8f9bb3] font-medium block">
                                 Total Notifications
                             </span>
-                            <span className="text-[22px] font-bold text-white block mt-0.5">
+                            <span className="text-[24px] font-bold text-white block mt-0.5">
                                 {counts.all}
                             </span>
                         </div>
@@ -127,12 +122,12 @@ const Notifications = () => {
                         </div>
                     </div>
 
-                    <div className="bg-[#171b2e] border border-[#282e45] rounded-xl p-4 flex items-center justify-between">
+                    <div className="bg-[#171b2e] border border-[#282e45] rounded-[10px] p-5 flex items-center justify-between">
                         <div>
-                            <span className="text-[12px] text-[#7a87a7] font-medium block">
+                            <span className="text-[12px] text-[#8f9bb3] font-medium block">
                                 Unread Alerts
                             </span>
-                            <span className="text-[22px] font-bold text-[#ff9da9] block mt-0.5">
+                            <span className="text-[24px] font-bold text-[#ff9da9] block mt-0.5">
                                 {counts.unread}
                             </span>
                         </div>
@@ -141,12 +136,12 @@ const Notifications = () => {
                         </div>
                     </div>
 
-                    <div className="bg-[#171b2e] border border-[#282e45] rounded-xl p-4 flex items-center justify-between">
+                    <div className="bg-[#171b2e] border border-[#282e45] rounded-[10px] p-5 flex items-center justify-between">
                         <div>
-                            <span className="text-[12px] text-[#7a87a7] font-medium block">
+                            <span className="text-[12px] text-[#8f9bb3] font-medium block">
                                 Read / Completed
                             </span>
-                            <span className="text-[22px] font-bold text-[#7fe3a8] block mt-0.5">
+                            <span className="text-[24px] font-bold text-[#7fe3a8] block mt-0.5">
                                 {counts.read}
                             </span>
                         </div>

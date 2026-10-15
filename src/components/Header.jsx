@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import NotificationBell from "./NotificationBell";
+import GlobalSearch from "./search/GlobalSearch";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "https://project-management-backend-sen3.onrender.com";
 
@@ -24,6 +25,8 @@ const PAGE_TITLES = {
     "/notifications": "Notifications",
     "/notification": "Notifications",
     "/reports": "Reports",
+    "/audit-logs": "Audit Logs",
+    "/search": "Search Results",
 };
 
 const Header = ({ onProfileClick }) => {
@@ -48,10 +51,12 @@ const Header = ({ onProfileClick }) => {
     }
 
     return (
-        <header className="flex justify-between items-center py-3 px-6 border-b border-[#282e45] bg-[#171b2e]">
-            <h2 className="text-[18px] font-bold m-0 text-white">{pageTitle}</h2>
+        <header className="flex justify-between items-center py-3 px-6 border-b border-[#282e45] bg-[#171b2e] gap-4">
+            <h2 className="text-[18px] font-bold m-0 text-white shrink-0 hidden md:block">{pageTitle}</h2>
 
-            <div className="flex items-center gap-5">
+            <GlobalSearch />
+
+            <div className="flex items-center gap-5 shrink-0">
                 <NotificationBell />
 
                 {user && (

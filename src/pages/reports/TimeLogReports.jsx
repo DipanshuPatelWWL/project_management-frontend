@@ -180,25 +180,21 @@ const TimeLogReports = () => {
         : [];
 
     return (
-        <div className="p-6 max-w-7xl mx-auto">
+        <div className="w-full p-[30px] max-md:p-5 box-border">
             {/* Header */}
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-                <div>
-                    <div className="flex items-center gap-2 mb-1">
-                        <Link
-                            to="/reports"
-                            className="text-[#94a3b8] hover:text-white transition-colors flex items-center gap-1 text-[13px]"
-                        >
-                            <FiArrowLeft size={14} /> Back to All Reports
-                        </Link>
-                    </div>
-                    <h1 className="text-2xl font-bold text-white flex items-center gap-2.5">
-                        <FiClock className="text-[#38bdf8]" /> Time Log & Effort Analytics
-                    </h1>
-                    <p className="text-[#94a3b8] text-[13px] mt-1">
-                        Review workforce hours, verify billable effort, analyze overtime, and inspect work log details.
-                    </p>
-                </div>
+            <div className="mb-6">
+                <Link
+                    to="/reports"
+                    className="text-[#8f9bb3] hover:text-white transition-colors flex items-center gap-1.5 text-[13px] mb-2 font-medium w-fit"
+                >
+                    <FiArrowLeft size={14} /> Back to All Reports
+                </Link>
+                <h1 className="m-0 text-[28px] font-bold text-white tracking-normal flex items-center gap-2.5">
+                    <FiClock className="text-[#38bdf8]" /> Time Log & Effort Analytics
+                </h1>
+                <p className="m-0 mt-1.5 text-[#8f9bb3] text-[14px]">
+                    Review workforce hours, verify billable effort, analyze overtime, and inspect work log details.
+                </p>
             </div>
 
             {/* Filter Toolbar */}
@@ -221,7 +217,7 @@ const TimeLogReports = () => {
             />
 
             {error && (
-                <div className="p-4 mb-6 rounded-xl bg-red-950/40 border border-red-800/40 text-red-300 text-[13px]">
+                <div className="p-4 mb-6 rounded-lg bg-red-950/40 border border-red-800/40 text-red-300 text-[13px]">
                     {error}
                 </div>
             )}

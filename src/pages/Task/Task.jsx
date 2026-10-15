@@ -476,7 +476,7 @@ const Task = () => {
 
                                                 {/* Sprint */}
                                                 <td className="border-none p-[15px] text-left text-[13px] text-[#e8ebf5] border-b border-[#282e45] whitespace-nowrap">
-                                                    <span className="inline-block py-[3px] px-2 bg-[#202742] border border-[#313d66] rounded-[5px] text-[#9fc5ff] text-[12px] font-medium capitalize">
+                                                    <span className="inline-block py-[3px] px-2 bg-[#222942] border border-[#30364d] rounded-[5px] text-[#9fc5ff] text-[12px] font-medium capitalize">
                                                         {getSprintName(task.sprint)}
                                                     </span>
                                                 </td>
