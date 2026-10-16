@@ -838,7 +838,6 @@ const Task = () => {
             {deleteTarget && (
                 <div
                     className="fixed inset-0 bg-[#05070f]/75 flex items-center justify-center z-[1000] p-5"
-                    onClick={() => setDeleteTarget(null)}
                 >
                     <div
                         className="w-full max-w-[450px] bg-[#171b2e] border border-[#30364d] rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-y-visible"

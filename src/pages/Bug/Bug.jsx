@@ -908,7 +908,6 @@ const Bug = () => {
             {previewImage && (
                 <div
                     className="fixed inset-0 z-[1100] bg-black/80 flex items-center justify-center p-4"
-                    onClick={() => setPreviewImage(null)}
                 >
                     <div className="relative max-w-4xl max-h-[90vh] overflow-hidden rounded-lg bg-[#171b2e] p-2">
                         <button

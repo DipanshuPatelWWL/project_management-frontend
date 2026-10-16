@@ -609,7 +609,6 @@ const TimeLog = () => {
             {viewLog && (
                 <div
                     className="fixed inset-0 bg-[#05070f]/75 flex items-center justify-center z-[1000] p-5 box-border"
-                    onClick={() => setViewLog(null)}
                 >
                     <div
                         className="bg-[#171b2e] border border-[#282e45] rounded-xl max-w-[600px] w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-200"
@@ -729,7 +728,6 @@ const TimeLog = () => {
             {deleteTarget && (
                 <div
                     className="fixed inset-0 bg-[#05070f]/75 flex items-center justify-center z-[1100] p-5"
-                    onClick={() => !deleting && setDeleteTarget(null)}
                 >
                     <div
                         className="bg-[#171b2e] border border-[#282e45] rounded-xl max-w-[460px] w-full p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-200"

@@ -640,7 +640,6 @@ const Meeting = () => {
             {viewMeeting && (
                 <div
                     className="fixed inset-0 bg-[#05070f]/75 flex items-center justify-center z-[1000] p-5 box-border"
-                    onClick={() => setViewMeeting(null)}
                 >
                     <div
                         className="w-[720px] max-w-full max-h-[90vh] bg-[#171b2e] border border-[#30364d] rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col"
@@ -878,7 +877,6 @@ const Meeting = () => {
             {deleteTarget && (
                 <div
                     className="fixed inset-0 bg-[#05070f]/75 flex items-center justify-center z-[1000] p-5 box-border"
-                    onClick={() => !deleting && setDeleteTarget(null)}
                 >
                     <div
                         className="w-[440px] max-w-full bg-[#171b2e] border border-[#30364d] rounded-xl p-6 shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
