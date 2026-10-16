@@ -50,6 +50,12 @@ const AuditLogFilters = ({ filters, onFilterChange, onReset }) => {
                 <option value="Project">Project</option>
                 <option value="Task">Task</option>
                 <option value="Bug">Bug</option>
+                <option value="Sprint">Sprint</option>
+                <option value="Company">Company</option>
+                <option value="Client">Client</option>
+                <option value="Meeting">Meeting</option>
+                <option value="Document">Document</option>
+                <option value="TimeLog">TimeLog</option>
             </select>
 
             {/* Date From */}
