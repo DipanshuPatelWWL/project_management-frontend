@@ -10,7 +10,7 @@ const GlobalSearch = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [results, setResults] = useState({ data: {}, counts: {} });
-
+ 
     const containerRef = useRef(null);
     const inputRef = useRef(null);
     const debounceTimeoutRef = useRef(null);
